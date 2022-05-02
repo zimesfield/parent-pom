@@ -4,10 +4,11 @@ name: test
 on:
   push:
     branches-ignore:
-      - 'release*'
+      - 'main'
+      - 'release'
 
 jobs:
   infra:
-    uses: zimesfield/devops/.github/workflows/github-ci-maven.yaml@main
+    uses: zimesfield/devops/.github/workflows/github-ci-maven-lib.yaml@main
     with:
       environment: ${{ github.event.inputs.environment }}
