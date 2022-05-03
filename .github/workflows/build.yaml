@@ -6,7 +6,6 @@ on:
     branches-ignore:
       - 'main'
       - 'release'
-
 jobs:
   infra:
     uses: zimesfield/devops/.github/workflows/github-ci-maven-lib.yaml@main
