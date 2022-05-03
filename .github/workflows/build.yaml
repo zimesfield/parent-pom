@@ -8,6 +8,7 @@ on:
       - 'release'
 jobs:
   infra:
+
     uses: zimesfield/devops/.github/workflows/github-ci-maven-lib.yaml@main
     with:
       environment: ${{ github.event.inputs.environment }}
