@@ -1,0 +1,13 @@
+name: Publish Maven Artifact
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release*'
+
+jobs:
+  infra:
+    uses: zimesfield/devops/.github/workflows/github-maven-deploy.yaml@main
+    with:
+      environment: ${{ github.event.inputs.environment }}

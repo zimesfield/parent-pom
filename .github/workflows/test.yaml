@@ -1,0 +1,13 @@
+#name: Commons Deploy
+name: test
+
+on:
+  push:
+    branches-ignore:
+      - 'release*'
+
+jobs:
+  infra:
+    uses: zimesfield/devops/.github/workflows/github-ci-maven.yaml@main
+    with:
+      environment: ${{ github.event.inputs.environment }}
