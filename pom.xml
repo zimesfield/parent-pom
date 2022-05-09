@@ -36,7 +36,7 @@
 
 
 	<properties>
-<!--		<spring-boot.version>2.6.6</spring-boot.version>-->
+		<spring-boot.version>2.6.6</spring-boot.version>
 
 		<problem-spring-web.version>0.27.0</problem-spring-web.version>
 		<commons.lang3>3.12.0</commons.lang3>
@@ -58,7 +58,8 @@
 <!--		<liquibase.version>4.3.5</liquibase.version>-->
 <!--		<liquibase-hibernate5.version>4.3.5</liquibase-hibernate5.version>-->
 
-<!--		<javax.validation.version>2.0.1.Final</javax.validation.version>-->
+		<javax.validation.version>2.0.1.Final</javax.validation.version>
+		<junit-jupiter.version>5.8.1</junit-jupiter.version>
 <!--		<validation-api.version>2.0.1.Final</validation-api.version>-->
 <!--&lt;!&ndash;		<hibernate.version>5.4.32.Final</hibernate.version>&ndash;&gt;-->
 
@@ -118,7 +119,13 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
-				<version>5.8.1</version>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit-jupiter.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -195,12 +202,12 @@
 							<path>
 								<groupId>org.springframework.boot</groupId>
 								<artifactId>spring-boot-configuration-processor</artifactId>
-<!--								<version>${parent.version}</version>-->
+								<version>${spring-boot.version}</version>
 							</path>
 							<path>
 								<groupId>org.projectlombok</groupId>
 								<artifactId>lombok</artifactId>
-								<version>1.18.4</version>
+								<version>${lombok.version}</version>
 							</path>
 							<path>
 								<groupId>org.mapstruct</groupId>
