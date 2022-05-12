@@ -1,0 +1,22 @@
+name: Test, Build & Deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release'
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: zimesfield/devops/.github/workflows/github-ci-maven-test.yaml@main
+  deploy:
+    needs: [ test ]
+    uses: zimesfield/devops/.github/workflows/github-ci-maven-deploy.yaml@main
+    with:
+      environment: ${{ github.event.inputs.environment }}
+    secrets:
+     OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+     OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+     OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+     MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
