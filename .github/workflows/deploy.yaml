@@ -13,8 +13,8 @@ jobs:
   deploy:
     needs: [ test ]
     uses: zimesfield/devops/.github/workflows/github-ci-maven-deploy.yaml@main
-#    with:
-#      environment: ${{ github.event.inputs.environment }}
+    with:
+      environment: ${{ github.event.inputs.environment }}
     secrets:
      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
      OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}

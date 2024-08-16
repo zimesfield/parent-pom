@@ -805,23 +805,10 @@
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
+						<artifactId>maven-deploy-plugin</artifactId>
 						<configuration>
-							<!-- Prevent gpg from using pinentry programs -->
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
+							<altDeploymentRepository>linode-snapshot-repo::default::https://artifact-registry.eu-central-1.linodeobjects.com/snapshots</altDeploymentRepository>
+							<altReleaseDeploymentRepository>linode-release-repo::default::https://artifact-registry.eu-central-1.linodeobjects.com/releases</altReleaseDeploymentRepository>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -829,15 +816,26 @@
 		</profile>
 	</profiles>
 
+<!--	<distributionManagement>-->
+<!--		<snapshotRepository>-->
+<!--			<id>ossrh</id>-->
+<!--			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--		</snapshotRepository>-->
+<!--		<repository>-->
+<!--			<id>ossrh</id>-->
+<!--			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--		</repository>-->
+<!--	</distributionManagement>-->
+
 	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>linode-release-repo</id>
+			<url>https://artifact-registry.eu-central-1.linodeobjects.com/releases</url>
 		</repository>
+		<snapshotRepository>
+			<id>linode-snapshot-repo</id>
+			<url>https://artifact-registry.eu-central-1.linodeobjects.com/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 </project>
