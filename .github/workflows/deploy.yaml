@@ -18,5 +18,7 @@ jobs:
     secrets:
      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
      OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
-     OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-     MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+     LINODE_SECRET_KEY: ${{ secrets.LINODE_SECRET_KEY }}
+     LINODE_ACCESS_KEY: ${{ secrets.LINODE_ACCESS_KEY }}
+#     OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+#     MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
