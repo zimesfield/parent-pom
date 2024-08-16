@@ -12,13 +12,9 @@ jobs:
     uses: zimesfield/devops/.github/workflows/github-ci-maven-test.yaml@main
   deploy:
     needs: [ test ]
-    uses: zimesfield/devops/.github/workflows/github-ci-maven-deploy.yaml@main
+    uses: zimesfield/devops/.github/workflows/github-ci-maven-linode-deploy.yaml@main
 #    with:
 #      environment: ${{ github.event.inputs.environment }}
     secrets:
-     OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-     OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
      LINODE_SECRET_KEY: ${{ secrets.LINODE_SECRET_KEY }}
      LINODE_ACCESS_KEY: ${{ secrets.LINODE_ACCESS_KEY }}
-#     OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-#     MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
