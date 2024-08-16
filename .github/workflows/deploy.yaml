@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'main'
-      - '*'
+      - 'release'
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     uses: zimesfield/devops/.github/workflows/github-ci-maven-test.yaml@main
   deploy:
     needs: [ test ]
-    uses: zimesfield/devops/.github/workflows/github-ci-maven-deploy.yaml@main
+    uses: zimesfield/devops/.github/workflows/github-ci-maven-release.yaml@main
 #    with:
 #      environment: ${{ github.event.inputs.environment }}
     secrets:
