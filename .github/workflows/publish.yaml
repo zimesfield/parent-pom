@@ -45,11 +45,11 @@ jobs:
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
           ./mvnw -B -Drevision=${NEW_VERSION} verify -P coverage --no-transfer-progress
-
-      - uses: codecov/codecov-action@v2
-        with:
-          file: ./**/target/site/jacoco/jacoco.xml
-          name: codecov
+#
+#      - uses: codecov/codecov-action@v2
+#        with:
+#          file: ./**/target/site/jacoco/jacoco.xml
+#          name: codecov
 
   publish-snapshot:
     timeout-minutes: 30
