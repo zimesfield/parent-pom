@@ -10,7 +10,9 @@
 	</parent>
 	<groupId>com.zimesfield</groupId>
 	<artifactId>parent</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+<!--	<version>0.0.2-SNAPSHOT</version>-->
+	<version>${revision}</version>
+
 	<name>parent-pom</name>
 	<description>zimesfield parent pom</description>
 

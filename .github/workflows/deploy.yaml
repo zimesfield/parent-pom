@@ -1,20 +1,20 @@
-name: Test, Build & Deploy
-
-on:
-  push:
-    branches:
-      - 'main'
-      - 'release'
-  workflow_dispatch:
-
-jobs:
-  test:
-    uses: zimesfield/devops/.github/workflows/github-ci-maven-test.yaml@main
-  deploy:
-    needs: [ test ]
-    uses: zimesfield/devops/.github/workflows/github-ci-maven-linode-deploy.yaml@main
-#    with:
-#      environment: ${{ github.event.inputs.environment }}
-    secrets:
-     LINODE_SECRET_KEY: ${{ secrets.LINODE_SECRET_KEY }}
-     LINODE_ACCESS_KEY: ${{ secrets.LINODE_ACCESS_KEY }}
+#name: Test, Build & Deploy
+#
+#on:
+#  push:
+#    branches:
+#      - 'main'
+#      - 'release'
+#  workflow_dispatch:
+#
+#jobs:
+#  test:
+#    uses: zimesfield/devops/.github/workflows/github-ci-maven-test.yaml@main
+#  deploy:
+#    needs: [ test ]
+#    uses: zimesfield/devops/.github/workflows/github-ci-maven-linode-deploy.yaml@main
+##    with:
+##      environment: ${{ github.event.inputs.environment }}
+#    secrets:
+#     LINODE_SECRET_KEY: ${{ secrets.LINODE_SECRET_KEY }}
+#     LINODE_ACCESS_KEY: ${{ secrets.LINODE_ACCESS_KEY }}
