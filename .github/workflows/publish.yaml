@@ -2,12 +2,10 @@ name: Publish Maven Artifact
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches:
-      - main
-permissions:
-  contents: read
+      - 'main'
+      - 'release'
+  workflow_dispatch:
 
 jobs:
   build:
