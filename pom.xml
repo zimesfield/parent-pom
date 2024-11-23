@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.zimesfield</groupId>
 	<artifactId>parent</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>parent-pom</name>
 	<description>zimesfield parent pom</description>
 
@@ -101,6 +101,7 @@
 		<profile.test/>
 		<profile.tls/>
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+		<properties-maven-exec.version>3.4.1</properties-maven-exec.version>
 		<sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
 		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
 		<spring-cloud-dependencies.version>2023.0.2</spring-cloud-dependencies.version>
@@ -164,7 +165,11 @@
 				<version>${mapstruct.version}</version>
 				<scope>provided</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${properties-maven-exec.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -579,6 +584,28 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+<!--				<plugin>-->
+<!--					<groupId>org.codehaus.mojo</groupId>-->
+<!--					<artifactId>exec-maven-plugin</artifactId>-->
+<!--					<version>${properties-maven-exec.version}</version>-->
+<!--					<executions>-->
+<!--						<execution>-->
+<!--							<id>fetch-openapi-spec</id>-->
+<!--							<phase>generate-sources</phase>-->
+<!--							<goals>-->
+<!--								<goal>exec</goal>-->
+<!--							</goals>-->
+<!--							<configuration>-->
+<!--								<executable>curl</executable>-->
+<!--								<arguments>-->
+<!--									<argument>${api-input-spec}</argument>-->
+<!--									<argument>-o</argument>-->
+<!--									<argument>src/main/resources/swagger/openapi.yaml</argument>-->
+<!--								</arguments>-->
+<!--							</configuration>-->
+<!--						</execution>-->
+<!--					</executions>-->
+<!--				</plugin>-->
 				<plugin>
 					<!--
                         Plugin that provides API-first development using openapi-generator-cli to
@@ -593,7 +620,7 @@
 								<goal>generate</goal>
 							</goals>
 							<configuration>
-								<inputSpec>${api-input-spec}</inputSpec>
+								<inputSpec>src/main/resources/swagger/openapi.yaml</inputSpec>
 								<generatorName>spring</generatorName>
 								<apiPackage>${api-package}</apiPackage>
 								<modelPackage>${api-model-package}</modelPackage>
@@ -647,7 +674,7 @@
 				<profile.test>testdev</profile.test>
 				<liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
 				<liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
-				<liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/booking</liquibase-plugin.url>
+				<liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/delivery</liquibase-plugin.url>
 				<liquibase-plugin.username>booking</liquibase-plugin.username>
 				<liquibase-plugin.password/>
 			</properties>
@@ -816,17 +843,6 @@
 		</profile>
 	</profiles>
 
-<!--	<distributionManagement>-->
-<!--		<snapshotRepository>-->
-<!--			<id>ossrh</id>-->
-<!--			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
-<!--		</snapshotRepository>-->
-<!--		<repository>-->
-<!--			<id>ossrh</id>-->
-<!--			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-<!--		</repository>-->
-<!--	</distributionManagement>-->
-
 	<distributionManagement>
 		<repository>
 			<id>linode-release-repo</id>
@@ -838,4 +854,20 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>linode-snapshot-repo</id>
+			<url>https://artifact-registry.eu-central-1.linodeobjects.com/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>linode-release-repo</id>
+			<url>https://artifact-registry.eu-central-1.linodeobjects.com/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
 </project>
