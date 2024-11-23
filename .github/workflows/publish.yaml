@@ -74,7 +74,7 @@ jobs:
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-          ./mvnw clean deploy -B -Drevision=2.0.0 -Prelease --batch-mode -D skipTests --no-transfer-progress
+          ./mvnw clean deploy -B -Drevision=2.0.0
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
