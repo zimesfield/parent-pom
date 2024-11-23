@@ -28,33 +28,33 @@ jobs:
           echo "Github username: ${GITHUB_ACTOR}"
           ./mvnw -B -Drevision=${NEW_VERSION} install --no-transfer-progress
 
-#  coverage:
-#    needs:
-#      - build
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: actions/setup-java@v3
-#        with:
-#          distribution: 'adopt'
-#          java-version: 17
-#
-#      - run: |
-#          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-#          echo "New version: ${NEW_VERSION}"
-#          echo "Github username: ${GITHUB_ACTOR}"
-#          ./mvnw -B -Drevision=${NEW_VERSION} verify -P coverage --no-transfer-progress
-#
-#      - uses: codecov/codecov-action@v2
-#        with:
-#          file: ./**/target/site/jacoco/jacoco.xml
-#          name: codecov
+  coverage:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 17
+
+      - run: |
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
+          echo "New version: ${NEW_VERSION}"
+          echo "Github username: ${GITHUB_ACTOR}"
+          ./mvnw -B -Drevision=${NEW_VERSION} verify -P coverage --no-transfer-progress
+
+      - uses: codecov/codecov-action@v2
+        with:
+          file: ./**/target/site/jacoco/jacoco.xml
+          name: codecov
 
   publish-snapshot:
     timeout-minutes: 30
-#    needs:
-#      - coverage
+    needs:
+      - coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
