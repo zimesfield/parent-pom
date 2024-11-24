@@ -24,8 +24,7 @@ jobs:
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-          ./mvnw -B -Drevision=2.0.0 install --no-transfer-progress
-#          ./mvnw -B -Drevision=${NEW_VERSION} install --no-transfer-progress
+          ./mvnw -B -Drevision=${NEW_VERSION} install --no-transfer-progress
 
   coverage:
     needs:
@@ -43,12 +42,13 @@ jobs:
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-#          ./mvnw -B -Drevision=${NEW_VERSION} verify -P coverage --no-transfer-progress
+          ./mvnw -B -Drevision=${NEW_VERSION} verify -P coverage --no-transfer-progress
 #
 #      - uses: codecov/codecov-action@v2
 #        with:
 #          file: ./**/target/site/jacoco/jacoco.xml
 #          name: codecov
+
 
   publish-snapshot:
     timeout-minutes: 30
@@ -69,16 +69,19 @@ jobs:
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }} # Value of the GPG private key to import
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
+      - name: Configure Maven
+        run: |
+          mkdir -p ~/.m2
+          echo "<settings><servers><server><id>ossrh</id><username>${{ secrets.OSSRH_USERNAME }}</username><password>${{ secrets.OSSRH_TOKEN }}</password></server></servers></settings>" > ~/.m2/settings.xml
+
       - name: Publish to Maven Central
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-          ./mvnw deploy -B -Drevision=2.0.0
+          ./mvnw clean deploy -B -Drevision=${NEW_VERSION} -Prelease --batch-mode -D skipTests --no-transfer-progress
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-
-#          ./mvnw clean deploy -B -Drevision=${NEW_VERSION} -Prelease --batch-mode -D skipTests --no-transfer-progress
