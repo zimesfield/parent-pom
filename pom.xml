@@ -5,13 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.1</version>
+		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.zimesfield</groupId>
 	<artifactId>parent</artifactId>
-	<version>2.0.2-SNAPSHOT</version>
-<!--	<version>${revision}</version>-->
+	<version>${revision}</version>
 
 	<name>parent-pom</name>
 	<description>zimesfield parent pom</description>
@@ -39,20 +38,21 @@
 		<connection>scm:git:git://github.com/zimesfield/commons.git</connection>
 		<developerConnection>scm:git:ssh://github.com:zimesfield/commons.git</developerConnection>
 		<url>http://github.com/zimesfield/commons/tree/main</url>
-
 	</scm>
 
 	<properties>
-		<!--
-            Build properties
-            The spring-boot version should match the one managed by https://mvnrepository.com/artifact/tech.jhipster/jhipster-dependencies/${jhipster-dependencies.version}
-        -->
+		<!--		Provide at the child project-->
 		<start-class/>
 		<base-test/>
+		<application-name/>
 		<api-input-spec/>
 		<api-package/>
 		<api-model-package/>
 
+		<!--
+            Build properties
+            The spring-boot version should match the one managed by https://mvnrepository.com/artifact/tech.jhipster/jhipster-dependencies/${jhipster-dependencies.version}
+        -->
 		<maven.version>3.2.5</maven.version>
 		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,54 +65,72 @@
 		<run.addResources>false</run.addResources>
 		<spring-boot.version>${project.parent.version}</spring-boot.version>
 		<archunit-junit5.version>1.3.0</archunit-junit5.version>
-		<checkstyle.version>10.17.0</checkstyle.version>
-		<git-commit-id-maven-plugin.version>9.0.0</git-commit-id-maven-plugin.version>
-		<hazelcast-hibernate53.version>5.1.0</hazelcast-hibernate53.version>
-		<hazelcast-spring.version>5.4.0</hazelcast-spring.version>
+		<blockhound-junit-platform.version>1.0.10.RELEASE</blockhound-junit-platform.version>
+		<checkstyle.version>10.21.2</checkstyle.version>
+		<feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
+		<git-commit-id-maven-plugin.version>9.0.1</git-commit-id-maven-plugin.version>
 		<jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
 		<jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
-		<jhipster-framework.version>8.6.0</jhipster-framework.version>
+		<jhipster-framework.version>8.9.0</jhipster-framework.version>
 		<jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
 		<jib-maven-plugin.image>eclipse-temurin:17-jre-focal</jib-maven-plugin.image>
-		<jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
+		<jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
 		<lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
-		<liquibase-plugin.driver/>
-		<liquibase-plugin.hibernate-dialect/>
-		<liquibase-plugin.password/>
-		<liquibase-plugin.url/>
-		<liquibase-plugin.username/>
-		<mapstruct.version>1.5.5.Final</mapstruct.version>
-		<zolando-problem.version>0.27.1</zolando-problem.version>
-		<maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
+		<mapstruct.version>1.6.3</mapstruct.version>
+		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 		<maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-		<maven-failsafe-plugin.version>3.3.0</maven-failsafe-plugin.version>
+		<maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
 		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
-		<maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
+		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-		<maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-		<maven-surefire-plugin.version>3.3.0</maven-surefire-plugin.version>
+		<maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
-		<modernizer-maven-plugin.version>2.9.0</modernizer-maven-plugin.version>
+		<micrometer-context-propagation.version>1.1.2</micrometer-context-propagation.version>
+		<modernizer-maven-plugin.version>3.1.0</modernizer-maven-plugin.version>
+		<mongock-bom.version>5.5.0</mongock-bom.version>
 		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
-		<openapi-generator-maven-plugin.version>7.6.0</openapi-generator-maven-plugin.version>
+		<zalando-problem.version>0.27.1</zalando-problem.version>
+		<openapi-generator-maven-plugin.version>7.11.0</openapi-generator-maven-plugin.version>
 		<profile.api-docs/>
 		<profile.e2e/>
-		<profile.no-liquibase/>
 		<profile.test/>
 		<profile.tls/>
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
-		<properties-maven-exec.version>3.4.1</properties-maven-exec.version>
-		<sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
-		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
-		<spring-cloud-dependencies.version>2023.0.2</spring-cloud-dependencies.version>
-		<springdoc-openapi-starter-webmvc-api.version>2.5.0</springdoc-openapi-starter-webmvc-api.version>
+		<resource.delimiter>@</resource.delimiter>
+		<sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
+		<spotless-maven-plugin.version>2.44.2</spotless-maven-plugin.version>
+		<spring-cloud-dependencies.version>2024.0.0</spring-cloud-dependencies.version>
+		<spring.profiles.active>dev</spring.profiles.active>
+		<springdoc-openapi-starter-webflux-api.version>2.7.0</springdoc-openapi-starter-webflux-api.version>
 	</properties>
 
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.playtika.reactivefeign</groupId>
+				<artifactId>feign-reactor-bom</artifactId>
+				<version>${feign-reactor-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.mongock</groupId>
+				<artifactId>mongock-bom</artifactId>
+				<version>${mongock-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>tech.jhipster</groupId>
 				<artifactId>jhipster-dependencies</artifactId>
@@ -120,6 +138,25 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webflux-api</artifactId>
+				<version>${springdoc-openapi-starter-webflux-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>context-propagation</artifactId>
+				<version>${micrometer-context-propagation.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.tools</groupId>
+				<artifactId>blockhound-junit-platform</artifactId>
+				<version>${blockhound-junit-platform.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-hibernate53</artifactId>
@@ -145,15 +182,9 @@
 				<version>${jackson-databind-nullable.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.version}</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.zalando/problem -->
-			<dependency>
 				<groupId>org.zalando</groupId>
 				<artifactId>problem</artifactId>
-				<version>${zolando-problem.version}</version>
+				<version>${zalando-problem.version}</version>
 			</dependency>
 
 			<dependency>
@@ -172,115 +203,19 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>${properties-maven-exec.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
+				<version>${jakarta-servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
 		</dependencies>
+
 	</dependencyManagement>
 	<build>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<executions>
-						<execution>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<mainClass>${start-class}</mainClass>
-						<!--
-                        Enable the line below to have remote debugging of your application on port 5005
-                        <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
-                        -->
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>com.diffplug.spotless</groupId>
-					<artifactId>spotless-maven-plugin</artifactId>
-					<version>${spotless-maven-plugin.version}</version>
-					<configuration>
-						<java>
-							<!-- <removeUnusedImports/> -->
-						</java>
-					</configuration>
-					<executions>
-						<execution>
-							<id>spotless</id>
-							<phase>process-sources</phase>
-							<goals>
-								<goal>apply</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>com.google.cloud.tools</groupId>
-					<artifactId>jib-maven-plugin</artifactId>
-					<version>${jib-maven-plugin.version}</version>
-					<configuration>
-						<from>
-							<image>${jib-maven-plugin.image}</image>
-							<platforms>
-								<platform>
-									<architecture>${jib-maven-plugin.architecture}</architecture>
-									<os>linux</os>
-								</platform>
-							</platforms>
-						</from>
-						<to>
-							<image>delivery:latest</image>
-						</to>
-						<container>
-							<entrypoint>
-								<shell>bash</shell>
-								<option>-c</option>
-								<arg>/entrypoint.sh</arg>
-							</entrypoint>
-							<ports>
-								<port>8082</port>
-								<port>5701/udp</port>
-							</ports>
-							<environment>
-								<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
-								<JHIPSTER_SLEEP>0</JHIPSTER_SLEEP>
-							</environment>
-							<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-							<user>1000</user>
-						</container>
-						<extraDirectories>
-							<paths>src/main/docker/jib</paths>
-							<permissions>
-								<permission>
-									<file>/entrypoint.sh</file>
-									<mode>755</mode>
-								</permission>
-							</permissions>
-						</extraDirectories>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>io.github.git-commit-id</groupId>
-					<artifactId>git-commit-id-maven-plugin</artifactId>
-					<version>${git-commit-id-maven-plugin.version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>revision</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<failOnNoGitDirectory>false</failOnNoGitDirectory>
-						<failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
-						<generateGitPropertiesFile>true</generateGitPropertiesFile>
-						<includeOnlyProperties>
-							<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
-							<includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty>
-							<includeOnlyProperty>^git.branch$</includeOnlyProperty>
-						</includeOnlyProperties>
-					</configuration>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
@@ -320,13 +255,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
-					<dependencies>
-						<dependency>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-configuration-processor</artifactId>
-							<version>3.3.1</version>
-						</dependency>
-					</dependencies>
 					<configuration>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
@@ -345,14 +273,6 @@
 								<groupId>org.mapstruct</groupId>
 								<artifactId>mapstruct-processor</artifactId>
 								<version>${mapstruct.version}</version>
-							</path>
-							<path>
-								<groupId>org.hibernate.orm</groupId>
-								<artifactId>hibernate-jpamodelgen</artifactId>
-							</path>
-							<path>
-								<groupId>org.glassfish.jaxb</groupId>
-								<artifactId>jaxb-runtime</artifactId>
 							</path>
 						</annotationProcessorPaths>
 					</configuration>
@@ -388,8 +308,8 @@
 								<version>[${maven.version},)</version>
 							</requireMavenVersion>
 							<requireJavaVersion>
-								<message>You are running an incompatible version of Java. JHipster supports JDK 17 to 22.</message>
-								<version>[17,18),[18,19),[19,20),[20,21),[21,22),[22,23)</version>
+								<message>You are running an incompatible version of Java. JHipster supports JDK 17 to 23.</message>
+								<version>[17,18),[21,22),[23,24)</version>
 							</requireJavaVersion>
 						</rules>
 					</configuration>
@@ -402,13 +322,14 @@
 						<!-- Due to spring-boot repackage, without adding this property test classes are not found
                              See https://github.com/spring-projects/spring-boot/issues/6254 -->
 						<!-- Force alphabetical order to have a reproducible build -->
+						<!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
 						<classesDirectory>${project.build.outputDirectory}</classesDirectory>
 						<runOrder>alphabetical</runOrder>
 						<includes>
 							<include>**/*IT*</include>
 							<include>**/*IntTest*</include>
 						</includes>
-						<argLine>@{argLine} -Dspring.profiles.active=${profile.test}</argLine>
+						<argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=${profile.test}</argLine>
 					</configuration>
 					<executions>
 						<execution>
@@ -449,11 +370,13 @@
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<!-- Force alphabetical order to have a reproducible build -->
+						<!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
 						<runOrder>alphabetical</runOrder>
 						<excludes>
 							<exclude>**/*IT*</exclude>
 							<exclude>**/*IntTest*</exclude>
 						</excludes>
+						<argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods</argLine>
 						<systemPropertyVariables>
 							<java.util.logging.config.file>src/test/resources/logback.xml</java.util.logging.config.file>
 						</systemPropertyVariables>
@@ -475,6 +398,128 @@
 					<configuration>
 						<warSourceIncludes>WEB-INF/**,META-INF/**</warSourceIncludes>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>build-info</id>
+							<goals>
+								<goal>build-info</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>repackage</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>${start-class}</mainClass>
+						<!--
+                        Enable the line below to have remote debugging of your application on port 5005
+                        <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
+                        -->
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.diffplug.spotless</groupId>
+					<artifactId>spotless-maven-plugin</artifactId>
+					<version>${spotless-maven-plugin.version}</version>
+					<configuration>
+						<java>
+							 <removeUnusedImports/>
+						</java>
+					</configuration>
+					<executions>
+						<execution>
+							<id>spotless</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>apply</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<version>${jib-maven-plugin.version}</version>
+					<configuration>
+						<from>
+							<image>${jib-maven-plugin.image}</image>
+							<platforms>
+								<platform>
+									<architecture>${jib-maven-plugin.architecture}</architecture>
+									<os>linux</os>
+								</platform>
+							</platforms>
+						</from>
+						<to>
+							<image>${application-name}:latest</image>
+						</to>
+						<container>
+							<entrypoint>
+								<shell>bash</shell>
+								<option>-c</option>
+								<arg>/entrypoint.sh</arg>
+							</entrypoint>
+							<ports>
+								<port>8081</port>
+							</ports>
+							<environment>
+								<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
+								<JHIPSTER_SLEEP>0</JHIPSTER_SLEEP>
+							</environment>
+							<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+							<user>1000</user>
+						</container>
+						<extraDirectories>
+							<paths>src/main/docker/jib</paths>
+							<permissions>
+								<permission>
+									<file>/entrypoint.sh</file>
+									<mode>755</mode>
+								</permission>
+							</permissions>
+						</extraDirectories>
+						<pluginExtensions>
+							<pluginExtension>
+								<implementation>com.google.cloud.tools.jib.maven.extension.springboot.JibSpringBootExtension</implementation>
+							</pluginExtension>
+						</pluginExtensions>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.google.cloud.tools</groupId>
+							<artifactId>jib-spring-boot-extension-maven</artifactId>
+							<version>0.1.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>io.github.git-commit-id</groupId>
+					<artifactId>git-commit-id-maven-plugin</artifactId>
+					<version>${git-commit-id-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>revision</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<failOnNoGitDirectory>false</failOnNoGitDirectory>
+						<failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+						<generateGitPropertiesFile>true</generateGitPropertiesFile>
+						<includeOnlyProperties>
+							<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+							<includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty>
+							<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+						</includeOnlyProperties>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -548,78 +593,6 @@
 					</executions>
 				</plugin>
 				<plugin>
-					<groupId>org.liquibase</groupId>
-					<artifactId>liquibase-maven-plugin</artifactId>
-					<version>${liquibase.version}</version>
-					<configuration>
-						<changeLogFile>config/liquibase/master.xml</changeLogFile>
-						<diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-						<driver>${liquibase-plugin.driver}</driver>
-						<url>${liquibase-plugin.url}</url>
-						<defaultSchemaName/>
-						<username>${liquibase-plugin.username}</username>
-						<password>${liquibase-plugin.password}</password>
-						<referenceUrl>hibernate:spring:com.zimesfield.delivery.domain?dialect=${liquibase-plugin.hibernate-dialect}&amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
-						<verbose>true</verbose>
-						<logging>debug</logging>
-						<contexts>!test</contexts>
-						<diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.liquibase</groupId>
-							<artifactId>liquibase-core</artifactId>
-							<version>${liquibase.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.liquibase.ext</groupId>
-							<artifactId>liquibase-hibernate6</artifactId>
-							<version>${liquibase.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>jakarta.validation</groupId>
-							<artifactId>jakarta.validation-api</artifactId>
-							<version>${jakarta-validation.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-starter-data-jpa</artifactId>
-							<version>${spring-boot.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>com.h2database</groupId>
-							<artifactId>h2</artifactId>
-							<version>${h2.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-<!--				<plugin>-->
-<!--					<groupId>org.codehaus.mojo</groupId>-->
-<!--					<artifactId>exec-maven-plugin</artifactId>-->
-<!--					<version>${properties-maven-exec.version}</version>-->
-<!--					<executions>-->
-<!--						<execution>-->
-<!--							<id>fetch-openapi-spec</id>-->
-<!--							<phase>generate-sources</phase>-->
-<!--							<goals>-->
-<!--								<goal>exec</goal>-->
-<!--							</goals>-->
-<!--							<configuration>-->
-<!--								<executable>curl</executable>-->
-<!--								<arguments>-->
-<!--									<argument>${api-input-spec}</argument>-->
-<!--									<argument>-o</argument>-->
-<!--									<argument>src/main/resources/swagger/openapi.yaml</argument>-->
-<!--								</arguments>-->
-<!--							</configuration>-->
-<!--						</execution>-->
-<!--					</executions>-->
-<!--				</plugin>-->
-				<plugin>
-					<!--
-                        Plugin that provides API-first development using openapi-generator-cli to
-                        generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                    -->
 					<groupId>org.openapitools</groupId>
 					<artifactId>openapi-generator-maven-plugin</artifactId>
 					<version>${openapi-generator-maven-plugin.version}</version>
@@ -629,7 +602,7 @@
 								<goal>generate</goal>
 							</goals>
 							<configuration>
-								<inputSpec>src/main/resources/swagger/openapi.yaml</inputSpec>
+								<inputSpec>${api-input-spec}</inputSpec>
 								<generatorName>spring</generatorName>
 								<apiPackage>${api-package}</apiPackage>
 								<modelPackage>${api-model-package}</modelPackage>
@@ -639,6 +612,9 @@
 									<delegatePattern>true</delegatePattern>
 									<title>delivery</title>
 									<useSpringBoot3>true</useSpringBoot3>
+									<useTags>true</useTags>
+									<useWebFlux>true</useWebFlux> <!-- Enables WebFlux -->
+									<reactive>true</reactive>  <!-- Enables WebFlux -->
 								</configOptions>
 								<typeMappings>
 									<typeMapping>Double=java.math.BigDecimal</typeMapping>
@@ -663,6 +639,7 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
 	</build>
 
 	<profiles>
@@ -679,13 +656,8 @@
 			</activation>
 			<properties>
 				<!-- default Spring profiles -->
-				<spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
-				<profile.test>testdev</profile.test>
-				<liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
-				<liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
-				<liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/delivery</liquibase-plugin.url>
-				<liquibase-plugin.username>booking</liquibase-plugin.username>
-				<liquibase-plugin.password/>
+				<profile.test>test,testdev</profile.test>
+				<spring.profiles.active>dev${profile.tls}</spring.profiles.active>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -693,54 +665,42 @@
 					<artifactId>spring-boot-devtools</artifactId>
 					<optional>true</optional>
 				</dependency>
-				<dependency>
-					<groupId>com.h2database</groupId>
-					<artifactId>h2</artifactId>
-				</dependency>
 			</dependencies>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<testExcludes>
-								<testExclude>com/zimesfield/booking/config/PostgreSqlTestContainer.java</testExclude>
-							</testExcludes>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.13</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-							<stagingProfileId>50a9964b73a11d</stagingProfileId>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 		<profile>
-			<id>no-liquibase</id>
-			<properties>
-				<profile.no-liquibase>,no-liquibase</profile.no-liquibase>
-			</properties>
+			<id>docker-compose</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-docker-compose</artifactId>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<!--
+                Profile for applying IDE-specific configuration.
+                At the moment it configures MapStruct and Hibernate JPA Metamodel Generator, which you need when working
+                with DTOs and entity filtering.
+            -->
+			<id>IDE</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.mapstruct</groupId>
+					<artifactId>mapstruct-processor</artifactId>
+					<version>${mapstruct.version}</version>
+				</dependency>
+			</dependencies>
 		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
 				<!-- default Spring profiles -->
-				<spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
-				<profile.test>testprod</profile.test>
-				<liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect</liquibase-plugin.hibernate-dialect>
-				<liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
-				<liquibase-plugin.url>jdbc:postgresql://localhost:5432/booking</liquibase-plugin.url>
-				<liquibase-plugin.username>booking</liquibase-plugin.username>
-				<liquibase-plugin.password/>
+				<profile.test>test,testprod</profile.test>
+				<spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}</spring.profiles.active>
 			</properties>
 			<build>
 				<plugins>
@@ -756,28 +716,11 @@
 						</configuration>
 					</plugin>
 					<plugin>
-						<groupId>org.springframework.boot</groupId>
-						<artifactId>spring-boot-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>build-info</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
 						<groupId>io.github.git-commit-id</groupId>
 						<artifactId>git-commit-id-maven-plugin</artifactId>
 					</plugin>
 				</plugins>
 			</build>
-			<dependencies>
-				<dependency>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-				</dependency>
-			</dependencies>
 		</profile>
 		<profile>
 			<id>tls</id>
@@ -786,108 +729,35 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>coverage</id>
+			<id>war</id>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>${jacoco-maven-plugin.version}</version>
-						<executions>
-							<!-- Prepares the property pointing to the JaCoCo runtime agent
-                            which is passed as VM argument when Maven the Surefire plugin is executed. -->
-							<execution>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<!-- Ensures that the code coverage report is created after
-                            all tests have been run. -->
-							<execution>
-								<id>generate-report</id>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>jacoco-check</id>
-								<goals>
-									<goal>check</goal>
-								</goals>
-								<configuration>
-									<rules>
-										<rule>
-											<element>PACKAGE</element>
-											<limits>
-												<limit>
-													<counter>LINE</counter>
-													<value>COVEREDRATIO</value>
-													<minimum>0.00</minimum>
-												</limit>
-											</limits>
-										</rule>
-									</rules>
-								</configuration>
-							</execution>
-						</executions>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
 		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>3.7.0</version>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-<!--					<plugin>-->
-<!--						<groupId>org.apache.maven.plugins</groupId>-->
-<!--						<artifactId>maven-gpg-plugin</artifactId>-->
-<!--						<version>3.2.3</version>-->
-<!--						<executions>-->
-<!--							<execution>-->
-<!--								<id>sign-artifacts</id>-->
-<!--								<phase>verify</phase>-->
-<!--								<goals>-->
-<!--									<goal>sign</goal>-->
-<!--								</goals>-->
-<!--							</execution>-->
-<!--						</executions>-->
-<!--					</plugin>-->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.2.3</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- Prevent gpg from using pinentry programs -->
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<!--
+                Profile for tracing requests with Zipkin.
+            -->
+			<id>zipkin</id>
+			<dependencies>
+				<dependency>
+					<groupId>io.micrometer</groupId>
+					<artifactId>micrometer-tracing</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.micrometer</groupId>
+					<artifactId>micrometer-tracing-bridge-brave</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.zipkin.reporter2</groupId>
+					<artifactId>zipkin-reporter-brave</artifactId>
+				</dependency>
+			</dependencies>
 		</profile>
 	</profiles>
 
