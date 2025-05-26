@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.zimesfield</groupId>
-	<artifactId>parent</artifactId>
-	<version>${revision}</version>
+	<artifactId>parent-pom</artifactId>
+	<version>3.0.3-SNAPSHOT</version>
 
 	<name>parent-pom</name>
 	<description>zimesfield parent pom</description>
@@ -35,9 +35,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/zimesfield/commons.git</connection>
-		<developerConnection>scm:git:ssh://github.com:zimesfield/commons.git</developerConnection>
-		<url>http://github.com/zimesfield/commons/tree/main</url>
+		<connection>scm:git:git://github.com/zimesfield/parent.git</connection>
+		<developerConnection>scm:git:ssh://github.com:zimesfield/parent.git</developerConnection>
+		<url>http://github.com/zimesfield/parent/tree/main</url>
 	</scm>
 
 	<properties>
@@ -48,6 +48,12 @@
 		<api-input-spec/>
 		<api-package/>
 		<api-model-package/>
+<!--		jdbc:postgresql://localhost:5432/deliveryService-->
+		<db-url/>
+<!--		<liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/deliveryService</liquibase-plugin.url>-->
+		<db-url-dev/>
+		<db-username/>
+		<db-password/>
 
 		<!--
             Build properties
@@ -76,6 +82,8 @@
 		<jib-maven-plugin.image>eclipse-temurin:17-jre-focal</jib-maven-plugin.image>
 		<jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
 		<lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
+		<hazelcast-hibernate53.version>5.1.0</hazelcast-hibernate53.version>
+		<hazelcast-spring.version>5.4.0</hazelcast-spring.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 		<maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
@@ -93,9 +101,10 @@
 		<mongock-bom.version>5.5.0</mongock-bom.version>
 		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
 		<zalando-problem.version>0.27.1</zalando-problem.version>
-		<openapi-generator-maven-plugin.version>7.11.0</openapi-generator-maven-plugin.version>
+		<openapi-generator-maven-plugin.version>7.12.0</openapi-generator-maven-plugin.version>
 		<profile.api-docs/>
 		<profile.e2e/>
+		<profile.no-liquibase/>
 		<profile.test/>
 		<profile.tls/>
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
@@ -259,10 +268,15 @@
 						<source>${java.version}</source>
 						<target>${java.version}</target>
 						<parameters>true</parameters>
+<!--						<includes>-->
+<!--&lt;!&ndash;							<include>src/main/java/**/*.java</include>&ndash;&gt;-->
+<!--							<include>${project.build.directory}/generated-sources/src/main/java</include>-->
+<!--						</includes>-->
 						<annotationProcessorPaths>
 							<path>
 								<groupId>org.springframework.boot</groupId>
 								<artifactId>spring-boot-configuration-processor</artifactId>
+								<version>3.4.0</version>
 							</path>
 							<path>
 								<groupId>org.projectlombok</groupId>
@@ -605,30 +619,48 @@
 								<inputSpec>${api-input-spec}</inputSpec>
 								<generatorName>spring</generatorName>
 								<apiPackage>${api-package}</apiPackage>
-								<modelPackage>${api-model-package}</modelPackage>
+								<modelPackage>${api-package}.model</modelPackage>
+								<invokerPackage>${api-package}.invoker</invokerPackage>
+
 								<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 								<skipValidateSpec>false</skipValidateSpec>
+								<addCompileSourceRoot>true</addCompileSourceRoot>
+
 								<configOptions>
 									<delegatePattern>true</delegatePattern>
-									<title>delivery</title>
+									<title>${application-name}</title>
 									<useSpringBoot3>true</useSpringBoot3>
+									<!-- THIS flag enables @RestController -->
+									<useSpringController>true</useSpringController>
+									<!-- Place @RequestMapping on the controller impl -->
+									<requestMappingMode>controller</requestMappingMode>
 									<useTags>true</useTags>
+
+<!--									<interfaceOnly>true</interfaceOnly>-->
+<!--									<skipDefaultInterface>true</skipDefaultInterface>-->
+
 									<useWebFlux>true</useWebFlux> <!-- Enables WebFlux -->
 									<reactive>true</reactive>  <!-- Enables WebFlux -->
 								</configOptions>
 								<typeMappings>
+									<typeMapping>date-time=java.time.LocalDateTime</typeMapping>
 									<typeMapping>Double=java.math.BigDecimal</typeMapping>
 									<typeMapping>Pageable=org.springframework.data.domain.Pageable</typeMapping>
 									<typeMapping>PageRequest=org.springframework.data.domain.PageRequest</typeMapping>
 									<typeMapping>PageResponse=org.springframework.data.domain.Pageable</typeMapping>
 									<typeMapping>Page=org.springframework.data.domain.Page</typeMapping>
+									<importMapping>Controller=org.springframework.web.bind.annotation.RestController</importMapping>
 								</typeMappings>
 								<importMappings>
+									<importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
 									<importMapping>Problem=org.zalando.problem.Problem</importMapping>
+									<importMapping>RestController=org.springframework.web.bind.annotation.RestController</importMapping>
 									<importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
 									<importMapping>PageRequest=org.springframework.data.domain.PageRequest</importMapping>
 								</importMappings>
+
 							</configuration>
+
 						</execution>
 					</executions>
 				</plugin>
@@ -649,6 +681,103 @@
 				<profile.api-docs>,api-docs</profile.api-docs>
 			</properties>
 		</profile>
+		<profile>
+			<id>no-liquibase</id>
+			<properties>
+				<profile.no-liquibase>,no-liquibase</profile.no-liquibase>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod-2</id>
+			<properties>
+				<!-- default Spring profiles -->
+				<spring.profiles.active>prod-2${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
+				<profile.test>testprod</profile.test>
+				<liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect</liquibase-plugin.hibernate-dialect>
+				<liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
+				<liquibase-plugin.url>${db-url}</liquibase-plugin.url>
+				<liquibase-plugin.username>${db-username}</liquibase-plugin.username>
+				<liquibase-plugin.password>${db-password}</liquibase-plugin.password>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>target/classes/static/</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>build-info</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>io.github.git-commit-id</groupId>
+						<artifactId>git-commit-id-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>dev-2</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- default Spring profiles -->
+				<spring.profiles.active>dev-2${profile.tls}${profile.no-liquibase}</spring.profiles.active>
+				<profile.test>testdev</profile.test>
+				<liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
+				<liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
+				<liquibase-plugin.url>${db-url-dev}</liquibase-plugin.url>
+				<liquibase-plugin.username>${db-username}</liquibase-plugin.username>
+				<liquibase-plugin.password/>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<testExcludes>
+								<testExclude>**/*/PostgreSqlTestContainer.java</testExclude>
+							</testExcludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<profile>
 			<id>dev</id>
 			<activation>
