@@ -668,7 +668,7 @@
 									<importMapping>Controller=org.springframework.web.bind.annotation.RestController</importMapping>
 								</typeMappings>
 								<importMappings>
-									<importMapping>Instant=java.time.Instant</importMapping>
+									<importMapping>date-time=java.time.Instant</importMapping>
 									<importMapping>Problem=org.zalando.problem.Problem</importMapping>
 									<importMapping>RestController=org.springframework.web.bind.annotation.RestController</importMapping>
 									<importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
