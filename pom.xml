@@ -659,20 +659,19 @@
 									<reactive>true</reactive>  <!-- Enables WebFlux -->
 								</configOptions>
 								<typeMappings>
-									<typeMapping>date-time=java.time.Instant</typeMapping>
-									<typeMapping>Double=java.math.BigDecimal</typeMapping>
-									<typeMapping>Pageable=org.springframework.data.domain.Pageable</typeMapping>
-									<typeMapping>PageRequest=org.springframework.data.domain.PageRequest</typeMapping>
-									<typeMapping>PageResponse=org.springframework.data.domain.Pageable</typeMapping>
-									<typeMapping>Page=org.springframework.data.domain.Page</typeMapping>
-									<importMapping>Controller=org.springframework.web.bind.annotation.RestController</importMapping>
+									<date-time>java.time.Instant</date-time>
+									<Double>java.math.BigDecimal</Double>
+									<Pageable>org.springframework.data.domain.Pageable</Pageable>
+									<PageRequest>org.springframework.data.domain.PageRequest</PageRequest>
+									<PageResponse>org.springframework.data.domain.Pageable</PageResponse>
+									<Page>org.springframework.data.domain.Page</Page>
 								</typeMappings>
 								<importMappings>
-									<importMapping>date-time=java.time.Instant</importMapping>
-									<importMapping>Problem=org.zalando.problem.Problem</importMapping>
-									<importMapping>RestController=org.springframework.web.bind.annotation.RestController</importMapping>
-									<importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
-									<importMapping>PageRequest=org.springframework.data.domain.PageRequest</importMapping>
+									<date-time>java.time.Instant</date-time>
+									<Problem>org.zalando.problem.Problem</Problem>
+									<RestController>org.springframework.web.bind.annotation.RestController</RestController>
+									<Pageable>org.springframework.data.domain.Pageable</Pageable>
+									<PageRequest>org.springframework.data.domain.PageRequest</PageRequest>
 								</importMappings>
 
 							</configuration>
