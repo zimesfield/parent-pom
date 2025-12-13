@@ -117,7 +117,7 @@
 		<resource.delimiter>@</resource.delimiter>
 		<sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
 		<spotless-maven-plugin.version>2.44.2</spotless-maven-plugin.version>
-		<spring-cloud-dependencies.version>2024.0.0</spring-cloud-dependencies.version>
+		<spring-cloud-dependencies.version>2024.0.3</spring-cloud-dependencies.version>
 		<spring.profiles.active>dev</spring.profiles.active>
 		<springdoc-openapi-starter-webflux-api.version>2.7.0</springdoc-openapi-starter-webflux-api.version>
 	</properties>
