@@ -247,9 +247,26 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+            <!-- RestAssured -->
             <dependency>
                 <groupId>io.rest-assured</groupId>
-                <artifactId>rest-assured-openapi-validator</artifactId>
+                <artifactId>rest-assured</artifactId>
+                <version>5.4.0</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- JSON Schema Validation -->
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>json-schema-validator</artifactId>
+                <version>5.4.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- OpenAPI validation (VERY IMPORTANT) -->
+            <dependency>
+                <groupId>com.atlassian.oai</groupId>
+                <artifactId>swagger-request-validator-restassured</artifactId>
+                <version>2.40.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -651,7 +668,9 @@
 					<version>${openapi-generator-maven-plugin.version}</version>
 					<executions>
 						<execution>
-							<goals>
+                            <id>generate-api</id>
+
+                            <goals>
 								<goal>generate</goal>
 							</goals>
 							<configuration>
@@ -664,6 +683,7 @@
 								<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 								<skipValidateSpec>false</skipValidateSpec>
 								<addCompileSourceRoot>true</addCompileSourceRoot>
+                                <output>${project.build.directory}/generated-sources/openapi</output>
 
 								<configOptions>
 									<delegatePattern>true</delegatePattern>
@@ -710,8 +730,68 @@
 							</configuration>
 
 						</execution>
-					</executions>
+                        <execution>
+                            <id>generate-api-tests</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <inputSpec>${api-input-spec}</inputSpec>
+                                <generatorName>java</generatorName>
+                                <apiPackage>${api-package}</apiPackage>
+                                <modelPackage>${api-package}.model</modelPackage>
+
+                                <!-- KEY PART -->
+                                <library>rest-assured</library>
+
+                                <output>${project.build.directory}/generated-test-sources/openapi</output>
+
+                                <configOptions>
+                                    <dateLibrary>java8</dateLibrary>
+                                    <useJakartaEe>true</useJakartaEe>
+                                    <interfaceOnly>true</interfaceOnly>
+                                </configOptions>
+
+                                <!-- Only generate tests -->
+                                <generateApis>true</generateApis>
+                                <generateModels>true</generateModels>
+                                <generateApiTests>true</generateApiTests>
+                                <generateModelTests>false</generateModelTests>
+                            </configuration>
+                        </execution>
+
+                    </executions>
 				</plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>add-source</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>${project.build.directory}/generated-sources/openapi/src/main/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>add-test-source</id>
+                            <phase>generate-test-sources</phase>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>${project.build.directory}/generated-test-sources/openapi/src/test/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
