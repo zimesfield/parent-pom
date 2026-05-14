@@ -1,4 +1,4 @@
-name: Publish Snapshot Maven Artifact
+name: Build Snapshot Artifacts
 
 on:
   push:
@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish-snapshot:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,28 +29,19 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: maven
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Generate Snapshot Version
+      - name: Compute Snapshot Version
         run: |
-          VERSION=$(grep -m1 "<version>" pom.xml | sed -E 's/.*<version>(.*)<\/version>.*/\1/')
-          VERSION="${VERSION/-SNAPSHOT/}-SNAPSHOT"
+          BASE_VERSION=$(grep -m1 "<version>" pom.xml | sed -E 's/.*<version>(.*)<\/version>.*/\1/')
+          SNAPSHOT_VERSION="${BASE_VERSION%-SNAPSHOT}-SNAPSHOT"
 
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Using version: $VERSION"
+          echo "VERSION=$SNAPSHOT_VERSION" >> $GITHUB_ENV
+          echo "Using version: $SNAPSHOT_VERSION"
 
-      - name: Build and Publish Snapshot
+      - name: Build Only (no Central deploy for snapshots)
         run: |
-          ./mvnw clean deploy \
+          ./mvnw clean install \
             -B \
             -Drevision=${VERSION} \
             -DskipTests \
             --no-transfer-progress
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
