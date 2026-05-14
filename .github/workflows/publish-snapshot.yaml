@@ -3,6 +3,9 @@ name: Publish Snapshot Maven Artifact
 on:
   push:
     branches:
+      - feature/*
+      - bugfix/*
+      - develop
       - main
 
 permissions:
