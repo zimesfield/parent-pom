@@ -60,7 +60,7 @@
         <!-- Quality -->
         <spotless.version>2.44.2</spotless.version>
         <modernizer-maven-plugin.version>3.1.0</modernizer-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 
         <!-- Analysis -->
         <sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
