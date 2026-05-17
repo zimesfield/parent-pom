@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+      - 'main'
 
 permissions:
   contents: read
@@ -47,11 +48,18 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Publishing version: $VERSION"
 
+      - name: Clean
+        run: ./mvnw clean
+
+      - name: Remove old artifacts
+        run: rm -rf ~/.m2/repository/com/zimesfield
+
       - name: Publish
         run: |
           ./mvnw -B \
             clean verify \
             org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drevision=${VERSION} \
+            -Drevision=0.0.1 \
             -DskipTests \
             --no-transfer-progress
+          
