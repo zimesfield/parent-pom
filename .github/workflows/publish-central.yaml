@@ -59,13 +59,17 @@ jobs:
               }
             ]
 
-      - name: Verify build
-        run: ./mvnw -B clean verify -DskipTests
-
-      - name: Build and Deploy
+      - name: Build and Sign Artifacts
         run: |
-          ./mvnw clean deploy \
+          ./mvnw clean verify \
             -B \
+            -Drevision=$VERSION \
+            -DskipTests \
+            --no-transfer-progress
+
+      - name: Publish to Maven Central
+        run: |
+          ./mvnw org.sonatype.central:central-publishing-maven-plugin:0.5.0:publish \
             -Drevision=$VERSION \
             -DskipTests \
             --no-transfer-progress
