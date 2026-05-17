@@ -14,6 +14,7 @@
 
     <name>Zimesfield Platform</name>
     <description>Zimesfield shared platform BOM and parent</description>
+
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <licenses>
@@ -36,16 +37,19 @@
         <url>https://github.com/zimesfield/zimesfield-platform</url>
     </scm>
 
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <url>https://central.sonatype.com/api/v1/publisher/deployments/download</url>
-        </repository>
-    </distributionManagement>
-
     <modules>
         <module>platform-bom</module>
         <module>platform-parent</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.5.0</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
