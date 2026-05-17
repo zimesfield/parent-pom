@@ -194,4 +194,10 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <url>https://central.sonatype.com/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

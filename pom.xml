@@ -43,23 +43,6 @@
         <url>https://github.com/zimesfield/zimesfield-platform</url>
     </scm>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.5.0</version>
-            </plugin>
-        </plugins>
-    </build>
-
     <distributionManagement>
         <repository>
             <id>central</id>

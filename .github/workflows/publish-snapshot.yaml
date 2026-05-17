@@ -1,19 +1,8 @@
-name: Build Snapshot Artifacts
+name: Snapshot Build
 
 on:
   push:
-    branches:
-      - feature/*
-      - bugfix/*
-      - develop
-      - main
-
-permissions:
-  contents: read
-
-concurrency:
-  group: maven-snapshot-build
-  cancel-in-progress: false
+    branches: [develop, feature/*, bugfix/*]
 
 jobs:
   build:

@@ -1,19 +1,12 @@
-name: Publish Maven Release
+name: Release to Maven Central
 
 on:
   push:
     tags:
       - 'v*'
 
-permissions:
-  contents: write
-
-concurrency:
-  group: maven-release-publish
-  cancel-in-progress: false
-
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -59,17 +52,11 @@ jobs:
               }
             ]
 
-      - name: Build and Sign Artifacts
+      - name: Deploy BOM
         run: |
-          ./mvnw clean verify \
-            -B \
-            -Drevision=$VERSION \
-            -DskipTests \
-            --no-transfer-progress
-
-      - name: Publish to Maven Central
-        run: |
-          ./mvnw org.sonatype.central:central-publishing-maven-plugin:0.5.0:publish \
+          ./mvnw clean deploy -B \
+            -pl platform-bom \
+            -am \
             -Drevision=$VERSION \
             -DskipTests \
             --no-transfer-progress
