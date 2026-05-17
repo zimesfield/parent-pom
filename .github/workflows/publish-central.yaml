@@ -54,9 +54,8 @@ jobs:
 
       - name: Deploy BOM
         run: |
-          ./mvnw clean deploy -B \
+          ./mvnw clean deploy \
             -pl platform-bom \
             -am \
             -Drevision=$VERSION \
-            -DskipTests \
-            --no-transfer-progress
+            -DskipTests
