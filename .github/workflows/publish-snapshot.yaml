@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -31,9 +30,19 @@ jobs:
           java-version: 21
           cache: maven
 
-      - name: Build Snapshot
+      - name: Set snapshot revision
         run: |
-          ./mvnw clean install \
-            -B \
+          echo "REVISION=${GITHUB_REF_NAME}-SNAPSHOT" >> $GITHUB_ENV
+
+      - name: Compile
+        run: |
+          ./mvnw -B clean compile \
+            -Drevision=${REVISION} \
+            --no-transfer-progress
+
+      - name: Build & Install
+        run: |
+          ./mvnw -B install \
+            -Drevision=${REVISION} \
             -DskipTests \
             --no-transfer-progress
