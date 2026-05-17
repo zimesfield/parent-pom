@@ -38,6 +38,8 @@
 
     <properties>
 
+        <revision>1.0.0-SNAPSHOT</revision>
+
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -120,61 +122,61 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Springdoc -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Springdoc &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-starter-webflux-api</artifactId>-->
+<!--                <version>${springdoc.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- Problem -->
-            <dependency>
-                <groupId>org.zalando</groupId>
-                <artifactId>problem</artifactId>
-                <version>${zalando-problem.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Problem &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.zalando</groupId>-->
+<!--                <artifactId>problem</artifactId>-->
+<!--                <version>${zalando-problem.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- MapStruct -->
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; MapStruct &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.mapstruct</groupId>-->
+<!--                <artifactId>mapstruct</artifactId>-->
+<!--                <version>${mapstruct.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- Lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Lombok &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.projectlombok</groupId>-->
+<!--                <artifactId>lombok</artifactId>-->
+<!--                <version>${lombok.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- Liquibase -->
-            <dependency>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-core</artifactId>
-                <version>${liquibase.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Liquibase &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-core</artifactId>-->
+<!--                <version>${liquibase.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- Jackson Nullable -->
-            <dependency>
-                <groupId>org.openapitools</groupId>
-                <artifactId>jackson-databind-nullable</artifactId>
-                <version>${jackson-databind-nullable.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Jackson Nullable &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>jackson-databind-nullable</artifactId>-->
+<!--                <version>${jackson-databind-nullable.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- ULID -->
-            <dependency>
-                <groupId>com.github.f4b6a3</groupId>
-                <artifactId>ulid-creator</artifactId>
-                <version>${ulid-creator.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; ULID &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.github.f4b6a3</groupId>-->
+<!--                <artifactId>ulid-creator</artifactId>-->
+<!--                <version>${ulid-creator.version}</version>-->
+<!--            </dependency>-->
 
-            <!-- Micrometer -->
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>context-propagation</artifactId>
-                <version>${micrometer-context-propagation.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Micrometer &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>io.micrometer</groupId>-->
+<!--                <artifactId>context-propagation</artifactId>-->
+<!--                <version>${micrometer-context-propagation.version}</version>-->
+<!--            </dependency>-->
 
         </dependencies>
 
@@ -187,11 +189,18 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
                     </execution>
+<!--                    <execution>-->
+<!--                        <id>sign-artifacts</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>sign</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
                 </executions>
             </plugin>
             <plugin>
@@ -219,11 +228,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <url>https://central.sonatype.com/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 </project>

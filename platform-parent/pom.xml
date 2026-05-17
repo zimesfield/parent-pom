@@ -29,7 +29,8 @@
 
         <!-- Build -->
         <java.version>21</java.version>
-        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.compiler.release>${project.version}</maven.compiler.release>
+        <revision>1.0.0-SNAPSHOT</revision>
 
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -160,8 +161,29 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>${maven-gpg-plugin.version}</version>
+<!--                    <version>${maven-gpg-plugin.version}</version>-->
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                        <!--                    <execution>-->
+                        <!--                        <id>sign-artifacts</id>-->
+                        <!--                        <phase>verify</phase>-->
+                        <!--                        <goals>-->
+                        <!--                            <goal>sign</goal>-->
+                        <!--                        </goals>-->
+                        <!--                    </execution>-->
+                    </executions>
+                </plugin>
+
 
             </plugins>
 
@@ -193,11 +215,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <url>https://central.sonatype.com/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 </project>
