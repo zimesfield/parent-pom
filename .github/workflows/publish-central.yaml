@@ -27,11 +27,19 @@ jobs:
           java-version: 21
           cache: maven
 
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Setup GPG TTY
+        run: echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
 
       - name: Extract version
         run: |
@@ -58,6 +66,6 @@ jobs:
         run: |
           ./mvnw clean deploy \
             -B \
-            -Drevision=${VERSION} \
+            -Drevision=$VERSION \
             -DskipTests \
             --no-transfer-progress
