@@ -11,7 +11,6 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>zimesfield-platform</artifactId>
         <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>platform-bom</artifactId>
@@ -19,7 +18,6 @@
 
     <name>Zimesfield Platform BOM</name>
     <description>Dependency management BOM for Zimesfield platform</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <licenses>
