@@ -44,5 +44,7 @@ jobs:
 
       - name: Publish
         run: |
-          mvn -B clean deploy \
+          ./mvnw -B clean deploy \
+            -pl platform-bom \
+            -am \
             -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }}
