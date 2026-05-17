@@ -69,8 +69,7 @@ jobs:
 
       - name: Publish to Maven Central
         run: |
-          ./mvnw clean deploy \
-            -B \
+          ./mvnw org.sonatype.central:central-publishing-maven-plugin:0.5.0:publish \
             -Drevision=$VERSION \
             -DskipTests \
             --no-transfer-progress
