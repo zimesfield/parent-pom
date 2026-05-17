@@ -20,6 +20,27 @@
     <name>Zimesfield Platform BOM</name>
     <description>Dependency management BOM for Zimesfield platform</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
+    <url>https://github.com/zimesfield/zimesfield-platform</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cyprian</id>
+            <name>Cyprian Omenuko</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+    </scm>
 
     <properties>
 

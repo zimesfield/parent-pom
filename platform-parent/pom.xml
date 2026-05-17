@@ -18,6 +18,25 @@
     <name>Zimesfield Platform Parent</name>
     <description>Shared parent POM for Zimesfield services</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cyprian</id>
+            <name>Cyprian Omenuko</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+    </scm>
 
     <properties>
 
