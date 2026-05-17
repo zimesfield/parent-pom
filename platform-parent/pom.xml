@@ -6,7 +6,7 @@
 
     <groupId>com.zimesfield</groupId>
     <artifactId>platform-parent</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform Parent</name>
@@ -30,7 +30,6 @@
         <!-- Build -->
         <java.version>21</java.version>
         <maven.compiler.release>${project.version}</maven.compiler.release>
-        <revision>1.0.0-SNAPSHOT</revision>
 
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
