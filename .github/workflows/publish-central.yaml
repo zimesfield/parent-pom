@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: maven-release-publish
@@ -20,11 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
           cache: maven
 
       - name: Import GPG Key
@@ -39,12 +39,25 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Publishing version: $VERSION"
 
-      - name: Build and Deploy to Maven Central
+      - name: Configure Maven Central credentials
+        uses: s4u/maven-settings-action@v4.0.0
+        with:
+          servers: |
+            [
+              {
+                "id": "central",
+                "username": "${{ secrets.CENTRAL_USERNAME }}",
+                "password": "${{ secrets.CENTRAL_PASSWORD }}"
+              }
+            ]
+
+      - name: Verify build
+        run: ./mvnw -B clean verify -DskipTests
+
+      - name: Build and Deploy
         run: |
           ./mvnw clean deploy \
             -B \
             -Drevision=${VERSION} \
             -DskipTests \
             --no-transfer-progress
-        env:
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
