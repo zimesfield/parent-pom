@@ -2,22 +2,18 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
-        <version>${revision}</version>
-    </parent>
-
+    <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>
     <description>Dependency management BOM for Zimesfield platform</description>
+
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <licenses>
@@ -79,7 +75,7 @@
 
         <dependencies>
 
-            <!-- Spring Boot -->
+            <!-- Spring Boot BOM -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -88,7 +84,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Spring Cloud -->
+            <!-- Spring Cloud BOM -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

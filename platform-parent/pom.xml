@@ -1,29 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
+    <groupId>com.zimesfield</groupId>
     <artifactId>platform-parent</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform Parent</name>
-    <description>Shared parent POM for Zimesfield services</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
+    <description>Shared build configuration for Zimesfield services</description>
 
     <developers>
         <developer>
@@ -73,20 +60,6 @@
         <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
 
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
 
     <build>
 
