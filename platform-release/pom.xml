@@ -14,6 +14,37 @@
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform Release</name>
+
+    <description>
+        Centralized release parent for Zimesfield platform providing source, javadoc, signing, and publishing configuration.
+    </description>
+
+    <url>https://github.com/zimesfield/zimesfield-platform</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cyprian</id>
+            <name>Cyprian Omenuko</name>
+            <email>comenuko@zimesfield.com</email>
+            <organization>Zimesfield</organization>
+            <organizationUrl>https://github.com/zimesfield</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+    </scm>
+
     <build>
         <plugins>
 
