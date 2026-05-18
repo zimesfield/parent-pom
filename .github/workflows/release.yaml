@@ -61,7 +61,7 @@ jobs:
           ./mvnw -B \
             clean verify \
             org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drevision=${VERSION} \
+            -Drelease.version=${VERSION} \
             -DskipTests \
             --no-transfer-progress
           
