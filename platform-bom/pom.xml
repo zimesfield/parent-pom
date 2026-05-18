@@ -2,13 +2,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
-        <version>1.0.0</version>
-    </parent>
-
+    <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>
@@ -37,9 +33,6 @@
     </scm>
 
     <properties>
-
-        <revision>1.0.0-SNAPSHOT</revision>
-
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
