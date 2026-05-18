@@ -5,15 +5,15 @@ on:
     branches:
       - main
       - develop
-      - feature/**
-      - bugfix/**
+      - 'feature/**'
+      - 'bugfix/**'
 
   push:
     branches:
       - main
       - develop
-      - feature/**
-      - bugfix/**
+      - 'feature/**'
+      - 'bugfix/**'
 
 concurrency:
   group: snapshot-${{ github.ref }}
@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup JDK 21
         uses: actions/setup-java@v5
@@ -37,17 +39,23 @@ jobs:
           java-version: 21
           cache: maven
 
-      - name: Set snapshot revision
+      - name: Compute Snapshot Version
         run: |
-          SAFE_BRANCH=$(echo "${GITHUB_REF_NAME}" \
-            | tr '/' '-' \
-            | tr '[:upper:]' '[:lower:]')
+          SHORT_SHA=$(git rev-parse --short HEAD)
 
-          echo "REVISION=${SAFE_BRANCH}-SNAPSHOT" >> $GITHUB_ENV
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            BRANCH="pr-${{ github.event.number }}"
+          else
+            BRANCH=$(echo "${GITHUB_REF_NAME}" \
+              | tr '/' '-' \
+              | tr '[:upper:]' '[:lower:]')
+          fi
+
+          echo "REVISION=${BRANCH}-${SHORT_SHA}-SNAPSHOT" >> $GITHUB_ENV
 
       - name: Build
         run: |
           ./mvnw -B clean verify \
-            -Drelease.version=${VERSION} \
+            -Drevision=${REVISION} \
             -Dgpg.skip=true \
             --no-transfer-progress
