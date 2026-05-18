@@ -7,11 +7,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zimesfield</groupId>
-    <artifactId>platform-release</artifactId>
-    <version>1.0.0</version>
+    <parent>
+        <groupId>com.zimesfield</groupId>
+        <artifactId>zimesfield-platform</artifactId>
+        <version>${revision}</version>
+    </parent>
 
     <packaging>pom</packaging>
+    <artifactId>platform-release</artifactId>
 
     <name>Zimesfield Platform Release</name>
 

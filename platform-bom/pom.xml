@@ -2,9 +2,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zimesfield</groupId>
+    <parent>
+        <groupId>com.zimesfield</groupId>
+        <artifactId>zimesfield-platform</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <artifactId>platform-bom</artifactId>
-    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>
