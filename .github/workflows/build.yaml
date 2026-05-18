@@ -5,14 +5,26 @@ on:
     branches:
       - main
       - develop
-      - feature/*
-      - bugfix/*
+      - feature/**
+      - bugfix/**
+
   push:
-    branches: [main, develop, feature/*, bugfix/*]
+    branches:
+      - main
+      - develop
+      - feature/**
+      - bugfix/**
+
+concurrency:
+  group: snapshot-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      MAVEN_OPTS: "-Xmx2g"
 
     steps:
       - name: Checkout
@@ -27,17 +39,15 @@ jobs:
 
       - name: Set snapshot revision
         run: |
-          echo "REVISION=${GITHUB_REF_NAME}-SNAPSHOT" >> $GITHUB_ENV
+          SAFE_BRANCH=$(echo "${GITHUB_REF_NAME}" \
+            | tr '/' '-' \
+            | tr '[:upper:]' '[:lower:]')
 
-      - name: Compile
-        run: |
-          ./mvnw -B clean compile \
-            -Drevision=${REVISION} \
-            --no-transfer-progress
+          echo "REVISION=${SAFE_BRANCH}-SNAPSHOT" >> $GITHUB_ENV
 
-      - name: Build & Install
+      - name: Build
         run: |
-          ./mvnw -B install \
+          ./mvnw -B clean verify \
             -Drevision=${REVISION} \
-            -DskipTests \
+            -Dgpg.skip=true \
             --no-transfer-progress
