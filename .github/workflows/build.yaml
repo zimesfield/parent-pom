@@ -48,6 +48,6 @@ jobs:
       - name: Build
         run: |
           ./mvnw -B clean verify \
-            -Drevision=${REVISION} \
+            -Drelease.version=${VERSION} \
             -Dgpg.skip=true \
             --no-transfer-progress
