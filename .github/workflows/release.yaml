@@ -2,8 +2,6 @@ name: Publish Maven Release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
 
@@ -63,7 +61,7 @@ jobs:
           ./mvnw -B \
             clean verify \
             org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drelease.version=1.0.0 \
+            -Drelease.version=${VERSION} \
             -DskipTests \
             --no-transfer-progress
           
