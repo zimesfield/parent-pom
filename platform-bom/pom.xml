@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>zimesfield-platform</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>platform-bom</artifactId>
