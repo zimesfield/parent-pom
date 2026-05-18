@@ -1,8 +1,14 @@
 name: Snapshot Build
 
 on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/*
+      - bugfix/*
   push:
-    branches: [develop, feature/*, bugfix/*]
+    branches: [main, develop, feature/*, bugfix/*]
 
 jobs:
   build:
