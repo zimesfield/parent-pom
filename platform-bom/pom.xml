@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
+        <artifactId>platform-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -27,6 +27,7 @@
         <developer>
             <id>cyprian</id>
             <name>Cyprian Omenuko</name>
+            <email>cykeromens@gmail.com</email>
         </developer>
     </developers>
 
