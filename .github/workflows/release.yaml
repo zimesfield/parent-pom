@@ -44,8 +44,8 @@ jobs:
       - name: Get Git Version
         id: version
         run: |
-          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          if [[ "${GITHUB_REF}" == refs/tags/v ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
           elif [[ "${GITHUB_REF_NAME}" == "develop" ]]; then
             VERSION="1.0.0-SNAPSHOT"
           else
