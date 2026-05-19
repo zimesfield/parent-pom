@@ -17,6 +17,8 @@
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform Parent</name>
+    <description>Parent POM for Zimesfield platform</description>
+
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <licenses>
