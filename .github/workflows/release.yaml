@@ -56,11 +56,15 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Detected version: $VERSION"
 
-      - name: Publish
+      - name: Set Maven version
         run: |
-          ./mvnw -B clean deploy \
-            -Drevision=${VERSION} \
-            --no-transfer-progress
+          ./mvnw versions:set \
+            -DnewVersion=${VERSION} \
+            -DgenerateBackupPoms=false
+
+      - name: Build & Deploy
+        run: |
+          ./mvnw -B clean deploy --no-transfer-progress
 #        run: |
 #          ./mvnw -B \
 #            clean verify \

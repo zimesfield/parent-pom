@@ -9,36 +9,17 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <properties>
-        <revision>1.0.0</revision>
-        <maven.compiler.release>21</maven.compiler.release>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
     <name>Zimesfield Platform</name>
-    <description>Zimesfield shared platform BOM and parent</description>
+    <description>Aggregator for Zimesfield platform modules</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
-
+    <properties>
+        <revision>1.0.0</revision>
+    </properties>
     <modules>
-        <module>platform-bom</module>
         <module>platform-parent</module>
+        <module>platform-bom</module>
         <module>platform-release</module>
     </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
 </project>

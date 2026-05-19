@@ -2,14 +2,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
+    <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>
@@ -39,6 +34,7 @@
     </scm>
 
     <properties>
+        <revision>1.0.0</revision>
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -121,12 +117,12 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Springdoc -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Springdoc &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-starter-webflux-api</artifactId>-->
+<!--                <version>${springdoc.version}</version>-->
+<!--            </dependency>-->
 
             <!-- Problem -->
             <dependency>
