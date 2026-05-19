@@ -43,19 +43,24 @@ jobs:
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
 
-          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            BRANCH="pr-${{ github.event.number }}"
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            BRANCH="pr-${GITHUB_REF##*/}"
           else
-            BRANCH=$(echo "${GITHUB_REF_NAME}" \
-              | tr '/' '-' \
-              | tr '[:upper:]' '[:lower:]')
+            BRANCH=$(echo "${GITHUB_REF_NAME}" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
           fi
 
           echo "REVISION=${BRANCH}-${SHORT_SHA}-SNAPSHOT" >> $GITHUB_ENV
+          echo "Computed revision: $REVISION"
+
+      - name: Cache Maven Repo
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
 
       - name: Build
         run: |
-          ./mvnw -B clean install \
+          ./mvnw -B clean verify \
             -Drevision=${REVISION} \
             -Dgpg.skip=true \
             --no-transfer-progress
