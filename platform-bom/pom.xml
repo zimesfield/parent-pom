@@ -6,6 +6,7 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
         <version>${revision}</version>
+        <relativePath>../platform-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>platform-bom</artifactId>
