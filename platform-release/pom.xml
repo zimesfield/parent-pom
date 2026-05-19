@@ -45,7 +45,7 @@
         <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
         <url>https://github.com/zimesfield/zimesfield-platform</url>
-        <tag>HEAD</tag>
+        <tag>${revision}</tag>
     </scm>
 
     <build>
@@ -110,6 +110,23 @@
                     <autoPublish>true</autoPublish>
                     <waitUntil>published</waitUntil>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
