@@ -10,7 +10,7 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>zimesfield-platform</artifactId>
         <version>${revision}</version>
-        <relativePath>../platform-parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>platform-parent</artifactId>
