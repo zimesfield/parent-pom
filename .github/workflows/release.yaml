@@ -64,7 +64,7 @@ jobs:
 
       - name: Build & Deploy
         run: |
-          ./mvnw -B clean deploy --no-transfer-progress
+          ./mvnw -B clean deploy -Drevision=$VERSION --no-transfer-progress
 #        run: |
 #          ./mvnw -B \
 #            clean verify \
