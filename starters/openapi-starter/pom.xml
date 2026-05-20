@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>openapi-starter</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>OpenAPI Starter</name>
     <description>Shared platform dependencies and parent POMs</description>

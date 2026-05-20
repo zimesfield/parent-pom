@@ -62,7 +62,7 @@ jobs:
 
       - name: Build
         run: |
-          ./mvnw clean verify -Drevision=${VERSION} --no-transfer-progress
+          ./mvnw clean verify -Drevision=${VERSION} -P release --no-transfer-progress
 
       - name: Publish to Maven Central
         run: |

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>modulith-starter</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Modulith Starter</name>
     <description>Reusable service starter module for Zimesfield platform</description>

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>library-starter</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>Library Starter</name>
 
     <description>Reusable service starter module for Zimesfield platform</description>
