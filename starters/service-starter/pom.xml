@@ -39,7 +39,7 @@
             <dependency>
                 <groupId>com.zimesfield</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
