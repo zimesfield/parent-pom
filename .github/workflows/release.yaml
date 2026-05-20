@@ -65,5 +65,6 @@ jobs:
           ./mvnw \
             -pl starters/service-starter,starters/modulith-starter,starters/library-starter,starters/openapi-starter \
             org.sonatype.central:central-publishing-maven-plugin:publish \
+            -Drevision=${VERSION} \
             --no-transfer-progress
 #
