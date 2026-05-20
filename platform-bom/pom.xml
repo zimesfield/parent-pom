@@ -43,8 +43,8 @@
         <spring-boot.version>3.5.14</spring-boot.version>
         <spring-cloud-dependencies.version>2025.0.1</spring-cloud-dependencies.version>
         <springdoc.version>2.7.0</springdoc.version>
-        <modulith.version>2.0.6</modulith.version>
-
+<!--        <modulith.version>2.0.6</modulith.version>-->
+        <spring.modulith.version>1.4.1</spring.modulith.version>
         <!-- Reactive -->
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
@@ -94,7 +94,7 @@
             <dependency>
                 <groupId>org.springframework.modulith</groupId>
                 <artifactId>spring-modulith-bom</artifactId>
-                <version>${modulith.version}</version>
+                <version>${spring.modulith.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
