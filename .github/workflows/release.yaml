@@ -64,8 +64,11 @@ jobs:
 
       - name: Publish to Maven Central
         run: |
-          ./mvnw -B \
-            clean verify \
+          ./mvnw -pl starters/service-starter,\
+            starters/modulith-starter,\
+            starters/library-starter,\
+            starters/openapi-starter \
+            -am \
             org.sonatype.central:central-publishing-maven-plugin:publish \
             -Drevision=${VERSION} \
             --no-transfer-progress
