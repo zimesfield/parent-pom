@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
       - name: Setup JDK 21
         uses: actions/setup-java@v5
@@ -41,30 +40,19 @@ jobs:
               }
             ]
 
-      - name: Get Git Version
-        id: version
+      - name: Get Version
         run: |
-          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
-          elif [[ "${GITHUB_REF_NAME}" == "develop" ]]; then
-            VERSION="1.0.0-SNAPSHOT"
-          else
-            SAFE=$(echo "${GITHUB_REF_NAME}" | tr '/' '-')
-            VERSION="1.0.0-${SAFE}-SNAPSHOT"
-          fi
-
+          VERSION=${GITHUB_REF#refs/tags/v}
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Detected version: $VERSION"
+
+      - name: Set Maven Version
+        run: |
+          ./mvnw versions:set -DnewVersion=${VERSION} -DgenerateBackupPoms=false
 
       - name: Build
         run: |
-          ./mvnw clean verify -Drevision=0.3.2 --no-transfer-progress
+          ./mvnw clean verify --no-transfer-progress
 
-      - name: Publish to Central
+      - name: Publish to Maven Central
         run: |
-          ./mvnw \
-            -pl platform-bom,platform-parent \
-            org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drevision=0.3.2 \
-            --no-transfer-progress
-#
+          ./mvnw org.sonatype.central:central-publishing-maven-plugin:publish --no-transfer-progress
