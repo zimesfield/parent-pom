@@ -44,7 +44,7 @@
         <spring-cloud-dependencies.version>2025.0.1</spring-cloud-dependencies.version>
         <springdoc.version>2.7.0</springdoc.version>
 <!--        <modulith.version>2.0.6</modulith.version>-->
-        <spring.modulith.version>1.4.1</spring.modulith.version>
+        <spring.modulith.version>1.4.11</spring.modulith.version>
         <!-- Reactive -->
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
