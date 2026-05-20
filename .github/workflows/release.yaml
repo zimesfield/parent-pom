@@ -56,22 +56,16 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Detected version: $VERSION"
 
-      - name: Set Maven version
-        run: |
-          ./mvnw versions:set \
-            -DnewVersion=${VERSION} \
-            -DgenerateBackupPoms=false
-
       - name: Build
         run: |
-          ./mvnw -B clean install --no-transfer-progress -DskipTests
+          ./mvnw -B clean install -Drevision=${VERSION} --no-transfer-progress -DskipTests
 
       - name: Publish to Central
         run: |
           ./mvnw -B \
-            -pl service-starter,modulith-starter,library-starter,openapi-starter \
+            -pl starters/service-starter,starters/modulith-starter,starters/library-starter,starters/openapi-starter \
             -am \
             org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drelease.version=${VERSION} \
+            -Drevision=${VERSION} \
             --no-transfer-progress
                 
