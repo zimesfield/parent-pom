@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -348,11 +348,14 @@
                     <configuration>
                         <rules>
                             <requireMavenVersion>
-                                <message>You are running an older version of Maven. Maven ${maven.version} or higher is required.</message>
+                                <message>You are running an older version of Maven. Maven ${maven.version} or higher is
+                                    required.
+                                </message>
                                 <version>[${maven.version},)</version>
                             </requireMavenVersion>
                             <requireJavaVersion>
-                                <message>You are running an incompatible version of Java. Java 21 LTS is required.</message>
+                                <message>You are running an incompatible version of Java. Java 21 LTS is required.
+                                </message>
                                 <version>[21,22)</version>
                             </requireJavaVersion>
                         </rules>
@@ -369,7 +372,9 @@
                             <include>**/*IT*</include>
                             <include>**/*IntTest*</include>
                         </includes>
-                        <argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=${profile.test}</argLine>
+                        <argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods
+                            -Dspring.profiles.active=${profile.test}
+                        </argLine>
                     </configuration>
                     <executions>
                         <execution>
@@ -416,7 +421,8 @@
                         </excludes>
                         <argLine>@{argLine} -XX:+AllowRedefinitionToAddDeleteMethods</argLine>
                         <systemPropertyVariables>
-                            <java.util.logging.config.file>src/test/resources/logback.xml</java.util.logging.config.file>
+                            <java.util.logging.config.file>src/test/resources/logback.xml
+                            </java.util.logging.config.file>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
@@ -501,7 +507,9 @@
                         </extraDirectories>
                         <pluginExtensions>
                             <pluginExtension>
-                                <implementation>com.google.cloud.tools.jib.maven.extension.springboot.JibSpringBootExtension</implementation>
+                                <implementation>
+                                    com.google.cloud.tools.jib.maven.extension.springboot.JibSpringBootExtension
+                                </implementation>
                             </pluginExtension>
                         </pluginExtensions>
                     </configuration>
@@ -652,9 +660,12 @@
                                     <importMapping>Instant=java.time.Instant</importMapping>
                                     <importMapping>BigDecimal=java.math.BigDecimal</importMapping>
                                     <importMapping>Problem=org.zalando.problem.Problem</importMapping>
-                                    <importMapping>RestController=org.springframework.web.bind.annotation.RestController</importMapping>
+                                    <importMapping>
+                                        RestController=org.springframework.web.bind.annotation.RestController
+                                    </importMapping>
                                     <importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
-                                    <importMapping>PageRequest=org.springframework.data.domain.PageRequest</importMapping>
+                                    <importMapping>PageRequest=org.springframework.data.domain.PageRequest
+                                    </importMapping>
                                 </importMappings>
                             </configuration>
                         </execution>
@@ -685,7 +696,8 @@
                             </goals>
                             <configuration>
                                 <sources>
-                                    <source>${project.build.directory}/generated-test-sources/openapi/src/test/java</source>
+                                    <source>${project.build.directory}/generated-test-sources/openapi/src/test/java
+                                    </source>
                                 </sources>
                             </configuration>
                         </execution>
@@ -717,7 +729,9 @@
                     <version>${liquibase.version}</version>
                     <configuration>
                         <changeLogFile>${liquibase.masterlog}</changeLogFile>
-                        <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.yaml</diffChangeLogFile>
+                        <diffChangeLogFile>
+                            ${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.yaml
+                        </diffChangeLogFile>
                         <driver>${liquibase-plugin.driver}</driver>
                         <url>${liquibase-plugin.url}</url>
                         <defaultSchemaName/>
@@ -726,7 +740,9 @@
                         <verbose>true</verbose>
                         <logging>debug</logging>
                         <contexts>!test</contexts>
-                        <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>
+                        <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details,
+                            oauth_client_token, oauth_code, oauth_refresh_token
+                        </diffExcludeObjects>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -769,9 +785,11 @@
         <profile>
             <id>prod</id>
             <properties>
-                <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
+                <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}
+                </spring.profiles.active>
                 <profile.test>testprod</profile.test>
-                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect</liquibase-plugin.hibernate-dialect>
+                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect
+                </liquibase-plugin.hibernate-dialect>
                 <liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
                 <liquibase-plugin.url>${db-url}</liquibase-plugin.url>
                 <liquibase-plugin.username>${db-username}</liquibase-plugin.username>
