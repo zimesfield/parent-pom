@@ -56,7 +56,7 @@
         <mapstruct.version>1.6.3</mapstruct.version>
 
         <!-- Utilities -->
-        <zalando-problem.version>0.27.1</zalando-problem.version>
+        <zalando-problem.version>0.29.1</zalando-problem.version>
         <lombok.version>1.18.38</lombok.version>
         <ulid-creator.version>5.2.3</ulid-creator.version>
 
@@ -127,7 +127,7 @@
             <!-- Problem -->
             <dependency>
                 <groupId>org.zalando</groupId>
-                <artifactId>problem</artifactId>
+                <artifactId>problem-spring-webflux</artifactId>
                 <version>${zalando-problem.version}</version>
             </dependency>
 

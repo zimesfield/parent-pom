@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>service-starter</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>Service Starter</name>
     <description>Reusable service starter module for Zimesfield platform</description>
@@ -58,47 +58,31 @@
         <springdoc.version>2.7.0</springdoc.version>
 
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>${project.parent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>platform-release</artifactId>
-                <version>${project.parent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-webflux</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-            </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
 
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
 
-            <dependency>
-                <groupId>org.zalando</groupId>
-                <artifactId>problem</artifactId>
-            </dependency>
-<!--             <dependency>-->
-<!--                <groupId>org.zalando</groupId>-->
-<!--                <artifactId>problem-spring-webflux</artifactId>-->
-<!--            </dependency>-->
-        </dependencies>
-    </dependencyManagement>
+         <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>problem-spring-webflux</artifactId>
+        </dependency>
+    </dependencies>
     <profiles>
         <profile>
             <id>api-docs</id>

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>modulith-starter</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>Modulith Starter</name>
     <description>Reusable service starter module for Zimesfield platform</description>
@@ -38,17 +38,6 @@
         <tag>HEAD</tag>
     </scm>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>${project.parent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
 
 <!--        <dependency>-->
