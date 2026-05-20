@@ -56,14 +56,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Detected version: $VERSION"
 
-      - name: Set Release Version
-        run: |
-          ./mvnw versions:set -DnewVersion=${VERSION} -DgenerateBackupPoms=false
-
-      - name: Build
-        run: |
-          ./mvnw clean verify -Drevision=${VERSION} -P release --no-transfer-progress
 
       - name: Publish to Maven Central
         run: |
-          ./mvnw org.sonatype.central:central-publishing-maven-plugin:publish -Drevision=${VERSION} --no-transfer-progress
+          ./mvnw clean deploy -Prelease -Drevision=${VERSION} -DskipTests --no-transfer-progress

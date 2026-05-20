@@ -13,18 +13,52 @@
     <description>Aggregator for Zimesfield platform modules</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cykeromens</id>
+            <name>Cyprian Omenuko</name>
+            <email>cykeromens@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <revision>1.0.0</revision>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
     <modules>
         <module>platform-parent</module>
         <module>platform-bom</module>
-        <module>platform-release</module>
+<!--        <module>platform-release</module>-->
 
         <module>starters/service-starter</module>
-        <module>starters/modulith-starter</module>
+<!--        <module>starters/modulith-starter</module>-->
         <module>starters/library-starter</module>
         <module>starters/openapi-starter</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>publish-starters</id>
+            <modules>
+                <module>starters/library-starter</module>
+                <module>starters/openapi-starter</module>
+                <module>starters/service-starter</module>
+                <module>starters/modulith-starter</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
