@@ -36,6 +36,10 @@
         </developer>
     </developers>
 
+    <properties>
+        <revision>1.0.0</revision>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
