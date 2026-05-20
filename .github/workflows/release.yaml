@@ -58,13 +58,13 @@ jobs:
 
       - name: Build
         run: |
-          ./mvnw clean verify -Drevision=${VERSION} --no-transfer-progress
+          ./mvnw clean verify -Drevision=0.3.2 --no-transfer-progress
 
       - name: Publish to Central
         run: |
           ./mvnw \
             -pl platform-bom,platform-parent \
             org.sonatype.central:central-publishing-maven-plugin:publish \
-            -Drevision=${VERSION} \
+            -Drevision=0.3.2 \
             --no-transfer-progress
 #
