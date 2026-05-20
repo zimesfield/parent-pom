@@ -62,14 +62,16 @@ jobs:
             -DnewVersion=${VERSION} \
             -DgenerateBackupPoms=false
 
-      - name: Build & Deploy
+      - name: Build
         run: |
-          ./mvnw -B clean deploy -Drevision=$VERSION --no-transfer-progress
-          #        run: |
-          #          ./mvnw -B \
-          #            clean verify \
-          #            org.sonatype.central:central-publishing-maven-plugin:publish \
-          #            -Drelease.version=${VERSION} \
-          #            -DskipTests \
-          #            --no-transfer-progress
-          
+          ./mvnw -B clean install --no-transfer-progress -DskipTests
+
+      - name: Publish to Central
+        run: |
+          ./mvnw -B \
+            -pl service-starter,modulith-starter,library-starter,openapi-starter \
+            -am \
+            org.sonatype.central:central-publishing-maven-plugin:publish \
+            -Drelease.version=${VERSION} \
+            --no-transfer-progress
+                
