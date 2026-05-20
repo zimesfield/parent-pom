@@ -21,10 +21,10 @@
         <module>platform-bom</module>
         <module>platform-release</module>
 
-        <module>starters/service-starter</module>
-        <module>starters/modulith-starter</module>
-        <module>starters/library-starter</module>
-        <module>starters/openapi-starter</module>
+<!--        <module>starters/service-starter</module>-->
+<!--        <module>starters/modulith-starter</module>-->
+<!--        <module>starters/library-starter</module>-->
+<!--        <module>starters/openapi-starter</module>-->
     </modules>
 
 </project>

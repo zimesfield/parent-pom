@@ -63,7 +63,7 @@ jobs:
       - name: Publish to Central
         run: |
           ./mvnw \
-            -pl starters/service-starter,starters/modulith-starter,starters/library-starter,starters/openapi-starter \
+            -pl platform-bom,platform-parent \
             org.sonatype.central:central-publishing-maven-plugin:publish \
             -Drevision=${VERSION} \
             --no-transfer-progress
