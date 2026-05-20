@@ -4,7 +4,7 @@
 
     <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
-    <version>${revision}</version>
+    <version>0.3.2</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>

@@ -6,7 +6,7 @@
 
     <groupId>com.zimesfield</groupId>
     <artifactId>zimesfield-platform</artifactId>
-    <version>${revision}</version>
+    <version>0.3.2</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform</name>
