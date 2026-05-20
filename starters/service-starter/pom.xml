@@ -6,15 +6,15 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
         <version>${revision}</version>
+        <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>service-starter</artifactId>
     <packaging>pom</packaging>
 
-    <properties>
-        <revision>1.0.0</revision>
-        <springdoc.version>2.7.0</springdoc.version>
+    <name>Service Starter</name>
 
+    <properties>
         <!-- Child project properties -->
         <start-class/>
         <application-name/>
@@ -30,6 +30,9 @@
         <profile.no-liquibase/>
         <profile.test/>
         <profile.tls/>
+
+        <springdoc.version>2.7.0</springdoc.version>
+
     </properties>
     <dependencyManagement>
         <dependencies>

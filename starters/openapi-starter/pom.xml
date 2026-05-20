@@ -6,12 +6,13 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
         <version>${revision}</version>
+        <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>openapi-starter</artifactId>
     <packaging>pom</packaging>
 
-    <name>OpenApi Starter</name>
+    <name>OpenAPI Starter</name>
     <description>Shared platform dependencies and parent POMs</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
@@ -38,8 +39,6 @@
     </scm>
 
     <properties>
-        <revision>1.0.0</revision>
-
         <!-- Child project properties -->
         <start-class/>
         <application-name/>

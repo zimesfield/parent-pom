@@ -6,14 +6,12 @@
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
         <version>${revision}</version>
+        <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>library-starter</artifactId>
     <packaging>pom</packaging>
-
-    <properties>
-        <revision>1.0.0</revision>
-    </properties>
+    <name>Library Starter</name>
 
     <dependencyManagement>
         <dependencies>
