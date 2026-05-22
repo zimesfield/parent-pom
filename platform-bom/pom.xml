@@ -50,7 +50,7 @@
 
         <!-- Database -->
         <mongock-bom.version>5.5.0</mongock-bom.version>
-        <liquibase.version>4.31.1</liquibase.version>
+        <liquibase.version>4.33.0</liquibase.version>
 
         <!-- Codegen -->
         <mapstruct.version>1.6.3</mapstruct.version>
