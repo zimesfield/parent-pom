@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running Java checks..."
+
+# Format code (if using spotless)
+mvn spotless:apply
+
+# Compile project
+mvn clean compile
+
+# Run unit tests
+mvn test

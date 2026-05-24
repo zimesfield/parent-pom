@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+commit_msg=$(cat "$1")
+
+echo "$commit_msg" | grep -E "^(feat|fix|chore|docs|refactor|test|build):" || {
+  echo "❌ Invalid commit message format!"
+  echo "Use: feat:, fix:, chore:, etc."
+  exit 1
+}
