@@ -1,73 +1,216 @@
-# parent-pom
+# Zimesfield Platform
 
-This repository is a parent multi-module Maven project that provides a curated platform for building microservice starters and release artifacts that are safe to publish to Maven Central.
+A enterprise-grade, multi-module Maven project providing a curated, production-ready platform for building microservices and reusable starter libraries. Designed with best practices for dependency management, build configuration, and Maven Central publication.
 
-It contains:
-- `parent-pom` (root aggregator / base pom)
-- `platform-bom/` (dependencyManagement BOM)
-- `platform-parent/` (parent POM for modules: plugin configuration, plugin versions, build defaults)
-- `platform-release/` (release artifacts aggregator, coordinate packaging for publication)
-- `starters/` (reusable starter modules)
-    - `service-starter/` (opinionated starter for microservices)
-    - `modulith-starter/`
-    - `openapi-starter/`
-    - `library-starter/`
+**Group ID:** `com.zimesfield`  
+**Current Version:** `1.0.0`  
+**License:** Apache License 2.0
 
-Goals:
-- Provide a single source of versions via a BOM to avoid dependency conflicts.
-- Provide a consistent parent POM with best-practice plugin and build configuration.
-- Produce artifacts that can be released to Maven Central (OSSRH).
-- Provide reusable starters for microservice projects.
+---
 
-## Recommended POM responsibilities
+## 📋 Project Overview
 
-We recommend splitting responsibilities across POMs:
+The Zimesfield Platform is built on a **separation of concerns** principle, where each POM file has a specific responsibility:
 
-1. Root `pom.xml` (aggregator)
-    - Packaging: `pom`
-    - Modules: list `platform-bom`, `platform-parent`, `platform-release`, `starters/*`
-    - Minimal plugin configuration. Aggregates modules so `mvn -pl ...` works.
+- **Version Management:** Single source of truth via `${revision}` property
+- **Dependency Management:** Centralized BOM for consistent dependency versions
+- **Plugin Management:** Shared plugin configuration for all modules
+- **Release Automation:** Publication to Maven Central via Sonatype Central
+- **Reusable Starters:** Pre-configured starter modules for microservices
 
-2. `platform-bom/pom.xml`
-    - Packaging: `pom`
-    - Contains `<dependencyManagement>` with exact versions for all shared dependencies (Spring/Guava/Jackson etc.)
-    - Exportable as BOM to let consumers import versions via `<dependencyManagement><import scope="import"/></dependencyManagement>`
+---
 
-3. `platform-parent/pom.xml`
-    - Packaging: `pom`
-    - Inherits the BOM (via `<dependencyManagement>`) or references it in `<dependencyManagement>` to ensure child modules follow versions.
-    - Centralizes plugin management and build defaults (maven-compiler-plugin, maven-surefire-plugin, enforcer plugin, encoding).
-    - Declares properties for Java version, project.version, groupId, plugin versions.
+## 🏗️ Project Structure
+parent-pom/ 
+├── pom.xml # Root aggregator (multi-module coordinator) 
+├── platform-bom/ # Dependency Management BOM 
+│ └── pom.xml 
+├── platform-parent/ # Parent POM (plugin management & defaults) 
+│ └── pom.xml 
+├── platform-release/ # Release configuration aggregator 
+│ └── pom.xml └── starters/ # Reusable starter modules 
+├── service-starter/ # Spring Boot microservice starter 
+├── modulith-starter/ # Spring Modulith modular starter 
+├── openapi-starter/ # OpenAPI 3.0 + code generation starter 
+└── library-starter/ # Generic reusable library starter
+---
 
-4. `platform-release/pom.xml`
-    - Packaging: `pom`
-    - This module lists the artifacts intended for release to Maven Central (starter JARs, BOM, other libraries).
-    - Configures distributionManagement (or inherits from parent) for release automation (note: credentials are provided at release-time via CI)
+## 📦 Module Responsibilities
 
-5. `starters/service-starter/pom.xml`
-    - Depends on the parent and imports the BOM to inherit versions.
-    - Minimal dependencies and configuration for a microservice starter (spring-boot-starter, actuator, logging, tracing if desired)
-    - Should be publishable as a library / starter with proper metadata (name, description, license, scm, developers).
+### 1. **Root POM** (`pom.xml`)
+**Purpose:** Multi-module aggregator
 
-## Example POM snippets
+- **GroupId:** `com.zimesfield`
+- **ArtifactId:** `zimesfield-platform`
+- **Packaging:** `pom`
+- **Modules:** Lists all child modules for coordinated builds
+- **Key Property:** `${revision}` = `1.0.0` (centralized versioning)
 
-Note: `com.example` and `1.0.0-SNAPSHOT` with your groupId/version.
+**Key Features:**
+- Maven Wrapper included (`mvnw`, `mvnw.cmd`) for consistent Maven version
+- SCM configuration pointing to GitHub
+- Developer metadata (Cyprian Omenuko)
+- Profile support for selective module publication
 
-Root aggregator (`pom.xml`):
+### 2. **Platform BOM** (`platform-bom/pom.xml`)
+**Purpose:** Dependency version management (Bill of Materials)
+
+- **ArtifactId:** `platform-bom`
+- **Packaging:** `pom`
+- **Scope:** Centralized version control
+
+**Imported BOMs:**
+- `org.springframework.boot:spring-boot-dependencies` (3.5.14)
+- `org.springframework.cloud:spring-cloud-dependencies` (2025.1.1)
+- `org.springframework.modulith:spring-modulith-bom` (1.4.11)
+- `io.mongock:mongock-bom` (5.5.0)
+- `com.playtika.reactivefeign:feign-reactor-bom` (4.2.1)
+
+**Managed Dependencies Include:**
+- **Spring:** Boot, Cloud, Modulith, OpenAPI (SpringDoc 2.8.17)
+- **Database:** MongoDB (Mongock), Liquibase (4.33.0), H2, PostgreSQL
+- **Code Generation:** MapStruct (1.6.3), Lombok (1.18.46)
+- **Utilities:** ULID Creator (5.2.3), Problem Library (0.29.1)
+- **Observability:** Micrometer (1.2.1)
+- **OpenAPI:** Jackson DataBind Nullable (0.2.10)
+
+**Build Plugins (PluginManagement):**
+- Maven Compiler (3.15.0) - Java 21 compatible
+- Maven Surefire/Failsafe (Testing)
+- Spotless (2.46.1) - Code formatting
+- JaCoCo (0.8.14) - Code coverage
+- Maven Source/Javadoc (3.4.0, 3.12.0)
+- Maven GPG (3.2.8) - Artifact signing
+- Flatten Maven Plugin (1.6.0) - POM flattening for CI-friendly versions
+- Sonatype Central Publishing (0.10.0) - Maven Central deployment
+
+**Release Profile:**
+Activates signing and source/javadoc generation when `mvn -Prelease install`
+
+### 3. **Platform Parent** (`platform-parent/pom.xml`)
+**Purpose:** Parent POM for all modules (plugin and build defaults)
+
+- **ArtifactId:** `platform-parent`
+- **Packaging:** `pom`
+- **Java Version:** 21
+
+**Key Properties:**
+- `java.version` = 21
+- `maven.compiler.release` = 21
+- `project.build.sourceEncoding` = UTF-8
+- Lombok version (1.18.38)
+- MapStruct version (1.6.3)
+
+**DependencyManagement:**
+- Imports the BOM (`platform-bom`) via `<dependencyManagement><import/></dependencyManagement>`
+- Ensures all child modules follow the same version constraints
+
+**PluginManagement:**
+- Compiler configuration with Lombok & MapStruct annotation processors
+- Test plugins (Surefire, Failsafe)
+- Code quality (Spotless, JaCoCo)
+- Release tools (GPG, Source, Javadoc, Flatten, Sonatype Central)
+
+---
+
+### 4. **Platform Release** (`platform-release/pom.xml`)
+**Purpose:** Release aggregator (coordinates publication to Maven Central)
+
+- **ArtifactId:** `platform-release`
+- **Packaging:** `pom`
+- **Parent:** `platform-parent`
+
+**Purpose:**
+- Groups artifacts for release
+- Activates signing and publication plugins via `mvn -Prelease deploy`
+- Release profile enables GPG signing and Sonatype Central publishing
+
+---
+
+### 5. **Starters** (`starters/*/pom.xml`)
+
+#### **Service Starter** - Microservice Starter
+- **ArtifactId:** `service-starter`
+- **Best for:** Building Spring Boot microservices with Zimesfield standards
+
+**Profiles:**
+- `dev` (default): H2 database, Spring DevTools, auto-reload
+- `prod`: PostgreSQL configuration, production Liquibase settings
+- `docker-compose`: Spring Boot Docker Compose support
+- `no-liquibase`: Skip database migrations
+- `api-docs`: Enable OpenAPI documentation
+
+**Dependencies (Transitive via BOM):**
+- Spring Boot Web/WebFlux
+- Spring Cloud
+- Liquibase (database versioning)
+- Testing (TestContainers)
+- Build info (git-commit-id-maven-plugin)
+
+**Configuration:**
+- Customizable properties: `start-class`, `application-name`, `db-url`, `db-username`, `db-password`
+- Liquibase master file: `src/main/resources/config/liquibase/master.yaml`
+
+---
+
+#### **Modulith Starter** - Modular Architecture Starter
+- **ArtifactId:** `modulith-starter`
+- **Best for:** Building modular monoliths with Spring Modulith
+
+**Direct Dependencies:**
+- `org.springframework.modulith:spring-modulith-starter-core`
+
+**Use Cases:**
+- Domain-driven design with module boundaries
+- Automatic API documentation between modules
+- Event-driven module communication
+
+---
+
+#### **OpenAPI Starter** - API-First Development Starter
+- **ArtifactId:** `openapi-starter`
+- **Best for:** API-first development with automatic code generation
+
+**Direct Dependencies:**
+- Spring Boot WebFlux, AOP, AutoConfigure
+- SpringDoc OpenAPI (WebFlux)
+- Zalando Problem Library (structured error responses)
+
+**Features:**
+- OpenAPI 3.0 code generation (v7.22.0)
+- Spring Controller generation
+- Reactive (WebFlux) support
+- Type mappings for Instant, BigDecimal, Problem types
+- Customizable API package structure
+
+**Configuration Properties:**
+- `api-input-spec`: OpenAPI YAML/JSON file path
+- `api-package`: Generated API package
+- `api-model-package`: Generated models package
+
+---
+
+#### **Library Starter** - Reusable Library Starter
+- **ArtifactId:** `library-starter`
+- **Best for:** Building reusable libraries/utilities
+
+**Minimal Dependencies:**
+- Lombok only
+
+**Plugins (PluginManagement):**
+- Standard build plugins (Checkstyle, Compiler, Enforcer, etc.)
+- Source/Javadoc generation
+- Spring Boot Maven Plugin
+
+---
+
+## 🚀 Key Features & Best Practices
+
+### ✅ Centralized Version Management
 ```xml
-<project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.zimesfield</groupId>
-  <artifactId>parent-pom</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+<!-- Single source of truth -->
+<revision>1.0.0</revision>
 
-  <modules>
-    <module>platform-bom</module>
-    <module>platform-parent</module>
-    <module>platform-release</module>
-    <module>starters/library-starter</module>
-    <module>starters/service-starter</module>
-    <!-- etc -->
-  </modules>
-</project>
+<!-- All modules inherit: -->
+<version>${revision}</version>
+
