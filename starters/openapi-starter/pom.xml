@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -14,114 +17,82 @@
 
     <name>OpenAPI Starter</name>
     <description>Shared platform dependencies and parent POMs</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
-
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>cykeromens</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
-        <tag>HEAD</tag>
-    </scm>
 
     <properties>
-        <!-- Child project properties -->
-        <start-class/>
-        <application-name/>
-        <api-input-spec/>
-        <api-package/>
-        <api-model-package/>
-        <db-url/>
-        <db-url-dev/>
-        <db-username/>
-        <db-password/>
-        <liquibase.masterlog>src/main/resources/config/liquibase/master.yaml</liquibase.masterlog>
-
-        <!-- Profile properties -->
-        <profile.api-docs/>
-        <profile.e2e/>
-        <profile.no-liquibase/>
-        <profile.test/>
-        <profile.tls/>
+        <!-- SpringDoc compatible with Spring Boot 3.x -->
+        <springdoc.version>2.6.0</springdoc.version>
+        <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
 
         <openapi-generator-maven-plugin.version>7.22.0</openapi-generator-maven-plugin.version>
+        <problem-spring-webflux.version>0.29.1</problem-spring-webflux.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- SpringDoc BOM-style control -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+<!--             Optional but compatible error model lib -->
+            <dependency>
+                <groupId>org.zalando</groupId>
+                <artifactId>problem-spring-webflux</artifactId>
+                <version>${problem-spring-webflux.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>${jackson-databind-nullable.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-        </dependency>
+        <!-- OpenAPI WebFlux UI (Swagger UI included) -->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>-->
+<!--        </dependency>-->
 
+        <!-- Optional (uncomment if needed) -->
+        <!--
         <dependency>
             <groupId>org.zalando</groupId>
             <artifactId>problem-spring-webflux</artifactId>
         </dependency>
+        -->
+
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.openapitools</groupId>
                     <artifactId>openapi-generator-maven-plugin</artifactId>
                     <version>${openapi-generator-maven-plugin.version}</version>
+
                     <executions>
                         <execution>
                             <id>generate-api</id>
                             <goals>
                                 <goal>generate</goal>
                             </goals>
+
                             <configuration>
                                 <inputSpec>${api-input-spec}</inputSpec>
                                 <generatorName>spring</generatorName>
+
                                 <apiPackage>${api-package}</apiPackage>
-                                <modelPackage>${api-package}.model</modelPackage>
+                                <modelPackage>${api-model-package}</modelPackage>
                                 <invokerPackage>${api-package}.invoker</invokerPackage>
 
                                 <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
@@ -132,6 +103,8 @@
                                 <configOptions>
                                     <delegatePattern>true</delegatePattern>
                                     <title>${application-name}</title>
+
+                                    <!-- Spring Boot 3 / 4 compatible -->
                                     <useSpringBoot3>true</useSpringBoot3>
                                     <useJakartaEe>true</useJakartaEe>
                                     <library>spring-boot</library>
@@ -140,10 +113,14 @@
                                     <useTags>true</useTags>
                                     <useWebFlux>true</useWebFlux>
                                     <reactive>true</reactive>
+
+                                    <library>spring-boot</library>
+                                    <useTags>true</useTags>
+                                    <useSpringController>true</useSpringController>
                                 </configOptions>
 
                                 <typeMappings>
-                                    <typeMapping>instant=Instant</typeMapping>
+                                    <typeMapping>Instant=Instant</typeMapping>
                                     <typeMapping>Double=BigDecimal</typeMapping>
                                     <typeMapping>Pageable=Pageable</typeMapping>
                                     <typeMapping>PageRequest=PageRequest</typeMapping>
@@ -152,6 +129,7 @@
                                     <typeMapping>Problem=Problem</typeMapping>
                                     <importMapping>Controller=RestController</importMapping>
                                 </typeMappings>
+
                                 <importMappings>
                                     <importMapping>Instant=java.time.Instant</importMapping>
                                     <importMapping>BigDecimal=java.math.BigDecimal</importMapping>
@@ -163,6 +141,7 @@
                                     <importMapping>PageRequest=org.springframework.data.domain.PageRequest
                                     </importMapping>
                                 </importMappings>
+
                             </configuration>
                         </execution>
                     </executions>
@@ -171,37 +150,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Sonatype Central -->
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                    </plugin>
-
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 
 </project>

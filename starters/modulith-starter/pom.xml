@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -13,15 +16,8 @@
     <packaging>pom</packaging>
 
     <name>Modulith Starter</name>
-    <description>Reusable service starter module for Zimesfield platform</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
 
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
+    <description>Spring Modulith starter module for Zimesfield platform</description>
 
     <developers>
         <developer>
@@ -38,45 +34,76 @@
         <tag>HEAD</tag>
     </scm>
 
-    <dependencies>
+    <properties>
+        <springdoc.version>2.6.0</springdoc.version>
+        <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
+    </properties>
 
-        <dependency>
-            <groupId>org.springframework.modulith</groupId>
-            <artifactId>spring-modulith-starter-core</artifactId>
-        </dependency>
+    <!-- ========================= -->
+    <!-- DEPENDENCY MANAGEMENT -->
+    <!-- ========================= -->
+    <dependencyManagement>
+        <dependencies>
+<!--            &lt;!&ndash; SpringDoc BOM-style control &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>-->
+<!--                <version>${springdoc.version}</version>-->
+<!--            </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.modulith</groupId>-->
-<!--            <artifactId>spring-modulith-starter-jpa</artifactId>-->
-<!--        </dependency>-->
+<!--            &lt;!&ndash;             Optional but compatible error model lib &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.zalando</groupId>-->
+<!--                <artifactId>problem-spring-webflux</artifactId>-->
+<!--                <version>${problem-spring-webflux.version}</version>-->
+<!--            </dependency>-->
 
-    </dependencies>
-
+<!--            <dependency>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>jackson-databind-nullable</artifactId>-->
+<!--                <version>${jackson-databind-nullable.version}</version>-->
+<!--            </dependency>-->
+        </dependencies>
+    </dependencyManagement>
+    <!-- ========================= -->
+    <!-- BUILD (NO DUPLICATION) -->
+    <!-- ========================= -->
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
     </build>
+
+    <!-- ========================= -->
+    <!-- RELEASE PROFILE ONLY -->
+    <!-- ========================= -->
     <profiles>
         <profile>
             <id>release</id>
+
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -92,7 +119,6 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
 
-                    <!-- Sonatype Central -->
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
@@ -100,8 +126,8 @@
 
                 </plugins>
             </build>
+
         </profile>
     </profiles>
-
 
 </project>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -11,90 +14,59 @@
 
     <artifactId>library-starter</artifactId>
     <packaging>pom</packaging>
+
     <name>Library Starter</name>
+    <description>Reusable library starter module for Zimesfield platform</description>
 
-    <description>Reusable service starter module for Zimesfield platform</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
+    <properties>
+        <!-- Plugin versions (stable & reproducible) -->
+<!--        <maven-source-plugin.version>3.4.1</maven-source-plugin.version>-->
+<!--        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>-->
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-plugin.version>0.10.0</central-publishing-plugin.version>
+    </properties>
 
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>cykeromens</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-    </dependencies>
+    <!-- ========================= -->
+    <!-- BUILD DEFAULT PLUGINS -->
+    <!-- ========================= -->
     <build>
         <plugins>
+
+            <!-- Sources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+
+            <!-- Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
+
+            <!-- GPG signing -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
+
+            <!-- Sonatype Central publishing -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
     </build>
+
+    <!-- ========================= -->
+    <!-- RELEASE PROFILE -->
+    <!-- (kept minimal; no duplication) -->
+    <!-- ========================= -->
     <profiles>
         <profile>
             <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Sonatype Central -->
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
     </profiles>
-
 
 </project>

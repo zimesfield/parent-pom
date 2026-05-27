@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -13,51 +18,30 @@
     <packaging>pom</packaging>
 
     <name>Service Starter</name>
-    <description>Reusable service starter module for Zimesfield platform</description>
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
-
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>cykeromens</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
-        <tag>HEAD</tag>
-    </scm>
 
     <properties>
-        <!-- Child project properties -->
         <start-class/>
         <application-name/>
+
         <db-url/>
         <db-url-dev/>
         <db-username/>
         <db-password/>
+
         <liquibase.masterlog>src/main/resources/config/liquibase/master.yaml</liquibase.masterlog>
 
-        <!-- Profile properties -->
+        <!-- Profile toggles -->
         <profile.api-docs/>
         <profile.e2e/>
         <profile.no-liquibase/>
         <profile.test/>
         <profile.tls/>
 
-        <springdoc.version>2.7.0</springdoc.version>
-
     </properties>
+
+    <!-- ========================= -->
+    <!-- DEPENDENCY MANAGEMENT -->
+    <!-- ========================= -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -70,146 +54,131 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- ========================= -->
+    <!-- BUILD -->
+    <!-- ========================= -->
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>api-docs</id>
-            <properties>
-                <profile.api-docs>,api-docs</profile.api-docs>
-            </properties>
-        </profile>
-        <profile>
-            <id>no-liquibase</id>
-            <properties>
-                <profile.no-liquibase>,no-liquibase</profile.no-liquibase>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}
-                </spring.profiles.active>
-                <profile.test>testprod</profile.test>
-                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect
-                </liquibase-plugin.hibernate-dialect>
-                <liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
-                <liquibase-plugin.url>${db-url}</liquibase-plugin.url>
-                <liquibase-plugin.username>${db-username}</liquibase-plugin.username>
-                <liquibase-plugin.password>${db-password}</liquibase-plugin.password>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>target/classes/static/</directory>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>build-info</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>io.github.git-commit-id</groupId>
-                        <artifactId>git-commit-id-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>r2dbc-postgresql</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.testcontainers</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
+    <!-- ========================= -->
+    <!-- PROFILES -->
+    <!-- ========================= -->
 
+    <profiles>
+
+        <!-- ================= DEV ================= -->
         <profile>
             <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
             <properties>
+                <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
+                <profile.test>test,testdev</profile.test>
+
                 <liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
-                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
-                <liquibase-plugin.password/>
                 <liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/tenant</liquibase-plugin.url>
                 <liquibase-plugin.username>tenant</liquibase-plugin.username>
-                <profile.test>test,testdev</profile.test>
-                <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
+                <liquibase-plugin.password/>
+                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
             </properties>
+
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
                     <optional>true</optional>
                 </dependency>
+
                 <dependency>
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                 </dependency>
+
                 <dependency>
                     <groupId>io.r2dbc</groupId>
                     <artifactId>r2dbc-h2</artifactId>
                 </dependency>
             </dependencies>
+        </profile>
+
+        <!-- ================= PROD ================= -->
+        <profile>
+            <id>prod</id>
+
+            <properties>
+                <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
+
+                <liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
+                <liquibase-plugin.url>${db-url}</liquibase-plugin.url>
+                <liquibase-plugin.username>${db-username}</liquibase-plugin.username>
+                <liquibase-plugin.password>${db-password}</liquibase-plugin.password>
+                <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect</liquibase-plugin.hibernate-dialect>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>r2dbc-postgresql</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.testcontainers</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+
             <build>
                 <plugins>
+
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <testExcludes>
-                                <testExclude>com/zimesfield/tenant/config/PostgreSqlTestContainer.java</testExclude>
-                            </testExcludes>
-                        </configuration>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
                     </plugin>
+
+                    <plugin>
+                        <groupId>io.github.git-commit-id</groupId>
+                        <artifactId>git-commit-id-maven-plugin</artifactId>
+                    </plugin>
+
                 </plugins>
             </build>
         </profile>
 
+        <!-- ================= DOCKER ================= -->
         <profile>
             <id>docker-compose</id>
+
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -218,10 +187,14 @@
                 </dependency>
             </dependencies>
         </profile>
+
+        <!-- ================= RELEASE ================= -->
         <profile>
             <id>release</id>
+
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -237,7 +210,6 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
 
-                    <!-- Sonatype Central -->
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
@@ -246,9 +218,7 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
-
-
-
 
 </project>

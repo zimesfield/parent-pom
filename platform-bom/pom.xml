@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -7,72 +9,61 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>Zimesfield Platform BOM</name>
-    <description>Dependency management BOM for Zimesfield platform</description>
-
-    <url>https://github.com/zimesfield/zimesfield-platform</url>
-
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>cyprian</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
-    </scm>
-
     <properties>
         <revision>1.0.0</revision>
+
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Spring -->
+        <!-- ========================= -->
+        <!-- SPRING BOOT 4 STACK -->
+        <!-- ========================= -->
+<!--        <spring-boot.version>4.0.6</spring-boot.version>-->
         <spring-boot.version>3.5.14</spring-boot.version>
-        <spring-cloud-dependencies.version>2025.1.1</spring-cloud-dependencies.version>
-        <springdoc.version>2.8.17</springdoc.version>
-<!--        <modulith.version>2.0.6</modulith.version>-->
-        <spring.modulith.version>1.4.11</spring.modulith.version>
-        <!-- Reactive -->
-        <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
 
-        <!-- Database -->
-        <mongock-bom.version>5.5.0</mongock-bom.version>
+        <!-- Spring ecosystem -->
+        <spring.modulith.version>1.4.7</spring.modulith.version>
+        <spring-cloud-config-server.version>5.0.3</spring-cloud-config-server.version>
+        <springdoc-openapi.version>2.8.9</springdoc-openapi.version>
+
+        <!-- Data / Infra -->
+        <mongock.version>5.5.0</mongock.version>
         <liquibase.version>4.33.0</liquibase.version>
 
         <!-- Codegen -->
         <mapstruct.version>1.6.3</mapstruct.version>
-
-        <!-- Utilities -->
-        <zalando-problem.version>0.29.1</zalando-problem.version>
         <lombok.version>1.18.46</lombok.version>
+
+        <!-- OpenAPI / JSON -->
+        <jackson-databind-nullable.version>0.2.10</jackson-databind-nullable.version>
+
+        <!-- Utils -->
         <ulid-creator.version>5.2.3</ulid-creator.version>
 
         <!-- Observability -->
         <micrometer-context-propagation.version>1.2.1</micrometer-context-propagation.version>
 
-        <!-- OpenAPI -->
-        <jackson-databind-nullable.version>0.2.10</jackson-databind-nullable.version>
+        <!-- Testing -->
+        <rest-assured.version>6.0.0</rest-assured.version>
+
+        <!-- Reactive Feign -->
+        <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
+
+        <!-- Zalando Problem -->
+        <problem-spring.version>0.29.3</problem-spring.version>
 
     </properties>
 
     <dependencyManagement>
 
+        <!-- ========================= -->
+        <!-- SPRING BOMs -->
+        <!-- ========================= -->
+
         <dependencies>
 
-            <!-- Spring Boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -81,16 +72,14 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Spring Cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
-            <!-- Spring Modulith -->
             <dependency>
                 <groupId>org.springframework.modulith</groupId>
                 <artifactId>spring-modulith-bom</artifactId>
@@ -99,16 +88,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Mongock -->
-            <dependency>
-                <groupId>io.mongock</groupId>
-                <artifactId>mongock-bom</artifactId>
-                <version>${mongock-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Reactive Feign -->
             <dependency>
                 <groupId>com.playtika.reactivefeign</groupId>
                 <artifactId>feign-reactor-bom</artifactId>
@@ -117,60 +96,83 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--            &lt;!&ndash; Springdoc &ndash;&gt;-->
+            <dependency>
+                <groupId>io.mongock</groupId>
+                <artifactId>mongock-bom</artifactId>
+                <version>${mongock.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud-config-server.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-                <version>${springdoc.version}</version>
+                <version>${springdoc-openapi.version}</version>
+                <scope>compile</scope>
             </dependency>
 
-            <!-- Problem -->
-            <dependency>
-                <groupId>org.zalando</groupId>
-                <artifactId>problem-spring-webflux</artifactId>
-                <version>${zalando-problem.version}</version>
-            </dependency>
+            <!-- ========================= -->
+            <!-- LIBRARY VERSION CONTROL -->
+            <!-- ========================= -->
 
-            <!-- MapStruct -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
 
-            <!-- Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
 
-            <!-- Liquibase -->
             <dependency>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
                 <version>${liquibase.version}</version>
             </dependency>
 
-            <!-- Jackson Nullable -->
             <dependency>
                 <groupId>org.openapitools</groupId>
                 <artifactId>jackson-databind-nullable</artifactId>
                 <version>${jackson-databind-nullable.version}</version>
             </dependency>
 
-            <!-- ULID -->
             <dependency>
                 <groupId>com.github.f4b6a3</groupId>
                 <artifactId>ulid-creator</artifactId>
                 <version>${ulid-creator.version}</version>
             </dependency>
 
-            <!-- Micrometer -->
             <dependency>
                 <groupId>io.micrometer</groupId>
                 <artifactId>context-propagation</artifactId>
                 <version>${micrometer-context-propagation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hiibernate-validator</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.zalando</groupId>
+                <artifactId>problem-spring-webflux</artifactId>
+                <version>${problem-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${rest-assured.version}</version>
+                <scope>test</scope>
             </dependency>
 
         </dependencies>
@@ -183,6 +185,7 @@
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -190,34 +193,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Sonatype Central -->
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                    </plugin>
-
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
