@@ -61,6 +61,11 @@ jobs:
           git config --global user.email "cykeromens@gmail.com"
           git config --global user.name "Cyprian Omenuko"
 
+      - name: Setup SSH for Git
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Maven Release
         run: |
           ./mvnw release:prepare -B
