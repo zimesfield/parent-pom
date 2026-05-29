@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.zimesfield</groupId>
+        <artifactId>platform-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../platform-parent/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>library-starter</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Library Starter</name>
+    <description>Reusable library starter module for Zimesfield platform</description>
+
+    <properties>
+        <!-- Plugin versions (stable & reproducible) -->
+<!--        <maven-source-plugin.version>3.4.1</maven-source-plugin.version>-->
+<!--        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>-->
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-plugin.version>0.10.0</central-publishing-plugin.version>
+    </properties>
+
+    <!-- ========================= -->
+    <!-- BUILD DEFAULT PLUGINS -->
+    <!-- ========================= -->
+    <build>
+        <plugins>
+
+            <!-- Sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <!-- GPG signing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+
+            <!-- Sonatype Central publishing -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- ========================= -->
+    <!-- RELEASE PROFILE -->
+    <!-- (kept minimal; no duplication) -->
+    <!-- ========================= -->
+    <profiles>
+        <profile>
+            <id>release</id>
+        </profile>
+    </profiles>
+
+</project>

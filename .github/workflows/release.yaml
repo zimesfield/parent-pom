@@ -57,16 +57,8 @@ jobs:
           echo "Detected version: $VERSION"
 
 
-      - name: Set Maven Version
+      - name: Maven Release
         run: |
-          ./mvnw -B versions:set \
-            -DnewVersion=${VERSION} \
-            -DgenerateBackupPoms=false
+          ./mvnw release:prepare -B
+          ./mvnw release:perform -B
 
-      - name: Update child modules
-        run: |
-          ./mvnw -N versions:update-child-modules
-
-      - name: Publish to Maven Central
-        run: |
-          ./mvnw clean deploy -Prelease -DskipTests --no-transfer-progress
