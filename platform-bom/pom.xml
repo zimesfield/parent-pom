@@ -1,19 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.zimesfield</groupId>
-        <artifactId>zimesfield-platform</artifactId>
-        <version>0.0.5</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
+    <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <properties>
-        <revision>1.0.0</revision>
+        <revision>0.6.0</revision>
 
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -55,7 +52,7 @@
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
         <!-- Zalando Problem -->
-        <problem-spring.version>0.29.1</problem-spring.version>
+        <problem-spring.version>0.29.3</problem-spring.version>
 
     </properties>
 
@@ -122,18 +119,6 @@
             <!-- ========================= -->
             <!-- LIBRARY VERSION CONTROL -->
             <!-- ========================= -->
-
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>commons</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>event</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.mapstruct</groupId>

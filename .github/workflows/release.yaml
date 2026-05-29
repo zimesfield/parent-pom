@@ -56,18 +56,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Detected version: $VERSION"
 
-      - name: Configure Git identity
-        run: |
-          git config --global user.email "cykeromens@gmail.com"
-          git config --global user.name "Cyprian Omenuko"
 
-      - name: Setup SSH for Git
+      - name: Publish to Maven Central
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Maven Release
-        run: |
-          ./mvnw release:prepare -B
-          ./mvnw release:perform -B
-
+          ./mvnw clean deploy -Prelease -Drevision=${VERSION} -DskipTests --no-transfer-progress

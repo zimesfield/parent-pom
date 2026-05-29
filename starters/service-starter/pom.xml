@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="            http://maven.apache.org/POM/4.0.0            https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
-        <version>0.0.5</version>
+        <version>${revision}</version>
         <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
@@ -16,22 +20,24 @@
     <name>Service Starter</name>
 
     <properties>
-        <start-class />
-        <application-name />
+        <revision>0.6.0</revision>
 
-        <db-url />
-        <db-url-dev />
-        <db-username />
-        <db-password />
+        <start-class/>
+        <application-name/>
+
+        <db-url/>
+        <db-url-dev/>
+        <db-username/>
+        <db-password/>
 
         <liquibase.masterlog>src/main/resources/config/liquibase/master.yaml</liquibase.masterlog>
 
         <!-- Profile toggles -->
-        <profile.api-docs />
-        <profile.e2e />
-        <profile.no-liquibase />
-        <profile.test />
-        <profile.tls />
+        <profile.api-docs/>
+        <profile.e2e/>
+        <profile.no-liquibase/>
+        <profile.test/>
+        <profile.tls/>
 
     </properties>
 
@@ -99,7 +105,7 @@
                 <liquibase-plugin.driver>org.h2.Driver</liquibase-plugin.driver>
                 <liquibase-plugin.url>jdbc:h2:file:${project.build.directory}/h2db/db/tenant</liquibase-plugin.url>
                 <liquibase-plugin.username>tenant</liquibase-plugin.username>
-                <liquibase-plugin.password />
+                <liquibase-plugin.password/>
                 <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.H2Dialect</liquibase-plugin.hibernate-dialect>
             </properties>
 

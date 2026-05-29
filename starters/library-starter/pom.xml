@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
-        <version>0.0.5</version>
+        <version>${revision}</version>
         <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
@@ -17,6 +19,7 @@
     <description>Reusable library starter module for Zimesfield platform</description>
 
     <properties>
+        <revision>0.6.0</revision>
         <!-- Plugin versions (stable & reproducible) -->
 <!--        <maven-source-plugin.version>3.4.1</maven-source-plugin.version>-->
 <!--        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>-->

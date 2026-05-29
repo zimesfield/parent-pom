@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>zimesfield-platform</artifactId>
-        <version>0.0.5</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,7 +19,7 @@
     <description>Release configuration for signing, sources, and javadoc</description>
 
     <properties>
-        <revision>1.0.0</revision>
+        <revision>0.6.0</revision>
         <flatten.version>1.6.0</flatten.version>
 
         <gpg.version>3.2.8</gpg.version>
