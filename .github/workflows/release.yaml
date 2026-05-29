@@ -63,6 +63,10 @@ jobs:
             -DnewVersion=${VERSION} \
             -DgenerateBackupPoms=false
 
+      - name: Update child modules
+        run: |
+          ./mvnw -N versions:update-child-modules
+
       - name: Publish to Maven Central
         run: |
           ./mvnw clean deploy -Prelease -DskipTests --no-transfer-progress

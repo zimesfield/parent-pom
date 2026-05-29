@@ -37,7 +37,7 @@
     <modules>
         <module>platform-parent</module>
         <module>platform-bom</module>
-<!--        <module>platform-release</module>-->
+        <module>platform-release</module>
 
         <module>starters/service-starter</module>
         <module>starters/modulith-starter</module>
