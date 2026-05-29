@@ -12,6 +12,31 @@
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform Parent</name>
+    <description>Reusable parent module for Zimesfield platform</description>
+
+    <url>https://github.com/zimesfield/platform</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>zimesfield</id>
+            <name>Zimesfield Team</name>
+            <email>tech@zimesfield.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+    </scm>
+
 
     <properties>
         <revision>0.6.0</revision>

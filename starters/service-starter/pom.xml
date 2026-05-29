@@ -19,6 +19,28 @@
 
     <name>Service Starter</name>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>zimesfield</id>
+            <name>Zimesfield Team</name>
+            <email>tech@zimesfield.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
+        <developerConnection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</developerConnection>
+        <url>https://github.com/zimesfield/zimesfield-platform</url>
+    </scm>
+
+
     <properties>
         <revision>0.6.0</revision>
 
@@ -75,6 +97,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
