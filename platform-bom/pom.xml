@@ -6,7 +6,7 @@
 
     <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -52,7 +52,7 @@
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
         <!-- Zalando Problem -->
-        <problem-spring.version>0.29.3</problem-spring.version>
+        <problem-spring.version>0.29.1</problem-spring.version>
 
     </properties>
 
@@ -119,6 +119,18 @@
             <!-- ========================= -->
             <!-- LIBRARY VERSION CONTROL -->
             <!-- ========================= -->
+
+            <dependency>
+                <groupId>com.zimesfield</groupId>
+                <artifactId>commons</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zimesfield</groupId>
+                <artifactId>event</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.mapstruct</groupId>
