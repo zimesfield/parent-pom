@@ -57,22 +57,50 @@
     <dependencies>
 
         <!-- OpenAPI WebFlux UI (Swagger UI included) -->
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+        </dependency>
 
         <!-- Optional (uncomment if needed) -->
-        <!--
         <dependency>
             <groupId>org.zalando</groupId>
             <artifactId>problem-spring-webflux</artifactId>
         </dependency>
-        -->
-
     </dependencies>
 
+    <!-- ========================= -->
+    <!-- BUILD DEFAULT PLUGINS -->
+    <!-- ========================= -->
     <build>
+        <plugins>
+
+            <!-- Sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <!-- GPG signing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+
+            <!-- Sonatype Central publishing -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
         <pluginManagement>
             <plugins>
 
