@@ -56,6 +56,10 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Detected version: $VERSION"
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "cykeromens@gmail.com"
+          git config --global user.name "Cyprian Omenuko"
 
       - name: Maven Release
         run: |
