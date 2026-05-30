@@ -18,6 +18,8 @@
     <packaging>pom</packaging>
 
     <name>Service Starter</name>
+    <description>Reusable service starter module for Zimesfield platform</description>
+    <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <licenses>
         <license>

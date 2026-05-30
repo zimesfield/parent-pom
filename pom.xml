@@ -46,19 +46,7 @@
         <module>starters/service-starter</module>
         <module>starters/modulith-starter</module>
         <module>starters/library-starter</module>
-<!--        <module>starters/openapi-starter</module>-->
+        <module>starters/openapi-starter</module>
     </modules>
-
-    <profiles>
-        <profile>
-            <id>publish-starters</id>
-            <modules>
-                <module>starters/library-starter</module>
-                <module>starters/openapi-starter</module>
-                <module>starters/service-starter</module>
-                <module>starters/modulith-starter</module>
-            </modules>
-        </profile>
-    </profiles>
 
 </project>

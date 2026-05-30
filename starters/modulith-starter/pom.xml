@@ -16,8 +16,8 @@
     <packaging>pom</packaging>
 
     <name>Modulith Starter</name>
-
     <description>Spring Modulith starter module for Zimesfield platform</description>
+    <url>https://github.com/zimesfield/zimesfield-platform</url>
 
     <developers>
         <developer>
