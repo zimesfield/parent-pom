@@ -60,6 +60,8 @@
         <mapstruct.version>1.6.3</mapstruct.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+<!--        <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>-->
     </properties>
 
     <!-- ========================= -->
@@ -70,13 +72,6 @@
             <dependency>
                 <groupId>com.zimesfield</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.zimesfield</groupId>
-                <artifactId>platform-release</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -171,22 +166,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>3.2.8</version>
-                    <executions>
-                        <execution>
-                            <id>sign</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-
-                    <configuration>
-                        <gpgArguments>
-                            <arg>--batch</arg>
-                            <arg>--yes</arg>
-                        </gpgArguments>
-                    </configuration>
                 </plugin>
 
                 <!-- Flatten -->
@@ -201,7 +180,7 @@
                     <executions>
                         <execution>
                             <id>flatten</id>
-                            <phase>process-resources</phase>
+                            <phase>validate</phase>
                             <goals>
                                 <goal>flatten</goal>
                             </goals>
@@ -221,80 +200,110 @@
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>0.10.0</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <publishingServerId>central</publishingServerId>
-                        <autoPublish>true</autoPublish>
-                        <waitUntil>published</waitUntil>
-                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.5.0</version>
                 </plugin>
 
             </plugins>
         </pluginManagement>
     </build>
 
-    <!-- ========================= -->
-    <!-- RELEASE PROFILE -->
-    <!-- ========================= -->
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
+<!--    &lt;!&ndash; ========================= &ndash;&gt;-->
+<!--    &lt;!&ndash; RELEASE PROFILE &ndash;&gt;-->
+<!--    &lt;!&ndash; ========================= &ndash;&gt;-->
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>release</id>-->
+<!--            <build>-->
+<!--                <plugins>-->
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-source-plugin</artifactId>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>attach-sources</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>jar-no-fork</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>attach-javadocs</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>jar</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-gpg-plugin</artifactId>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>sign-artifacts</id>-->
+<!--                                <phase>verify</phase>-->
+<!--                                <goals>-->
+<!--                                    <goal>sign</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                        <configuration>-->
+<!--                            <gpgArguments>-->
+<!--                                <arg>&#45;&#45;batch</arg>-->
+<!--                                <arg>&#45;&#45;yes</arg>-->
+<!--                            </gpgArguments>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
 
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                        <configuration>
-                            <publishingServerId>central</publishingServerId>
-                            <autoPublish>true</autoPublish>
-                            <waitUntil>published</waitUntil>
-                        </configuration>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.sonatype.central</groupId>-->
+<!--                        <artifactId>central-publishing-maven-plugin</artifactId>-->
+<!--                        <configuration>-->
+<!--                            <publishingServerId>central</publishingServerId>-->
+<!--                            <autoPublish>true</autoPublish>-->
+<!--                            <waitUntil>published</waitUntil>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
 
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-enforcer-plugin</artifactId>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>enforce</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>enforce</goal>-->
+<!--                                </goals>-->
+<!--                                <configuration>-->
+<!--                                    <rules>-->
+<!--                                        <requireMavenVersion>-->
+<!--                                            <version>[3.9,)</version>-->
+<!--                                        </requireMavenVersion>-->
+
+<!--                                        <requireJavaVersion>-->
+<!--                                            <version>[21,)</version>-->
+<!--                                        </requireJavaVersion>-->
+<!--                                    </rules>-->
+<!--                                </configuration>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+
+<!--                </plugins>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
 </project>

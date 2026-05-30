@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-      - main
-
 permissions:
   contents: read
 
@@ -60,4 +58,5 @@ jobs:
 
       - name: Publish to Maven Central
         run: |
-          ./mvnw clean deploy -Prelease -Drevision=${VERSION} -DskipTests --no-transfer-progress
+          ./mvnw -Prelease clean verify -Drevision=${VERSION}
+          ./mvnw org.sonatype.central:central-publishing-maven-plugin:0.10.0:publish

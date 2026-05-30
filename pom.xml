@@ -36,17 +36,42 @@
 
     <properties>
         <revision>0.6.0</revision>
-        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
     <modules>
         <module>platform-parent</module>
         <module>platform-bom</module>
         <module>platform-release</module>
 
-        <module>starters/service-starter</module>
-        <module>starters/modulith-starter</module>
-        <module>starters/library-starter</module>
-        <module>starters/openapi-starter</module>
+<!--        <module>starters/service-starter</module>-->
+<!--        <module>starters/modulith-starter</module>-->
+<!--        <module>starters/library-starter</module>-->
+<!--        <module>starters/openapi-starter</module>-->
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.8</version>
+
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <gpgArguments>
+                        <arg>--batch</arg>
+                        <arg>--yes</arg>
+                    </gpgArguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
