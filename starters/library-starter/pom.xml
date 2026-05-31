@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- ====================================================== -->
+    <!-- PARENT -->
+    <!-- ====================================================== -->
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -9,133 +18,226 @@
         <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
+    <!-- ====================================================== -->
+    <!-- PROJECT -->
+    <!-- ====================================================== -->
+
     <artifactId>library-starter</artifactId>
-    <packaging>pom</packaging>
+
+    <!--
+        IMPORTANT:
+        This should be a JAR starter module,
+        NOT a POM packaging module.
+    -->
+    <packaging>jar</packaging>
+
     <name>Library Starter</name>
 
-    <description>Reusable service starter module for Zimesfield platform</description>
+    <description>
+        Reusable library starter module for the Zimesfield platform
+    </description>
+
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
+    <!-- ====================================================== -->
+    <!-- LICENSE -->
+    <!-- ====================================================== -->
+
     <licenses>
+
         <license>
             <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>
+                https://www.apache.org/licenses/LICENSE-2.0.txt
+            </url>
+            <distribution>repo</distribution>
         </license>
+
     </licenses>
+
+    <!-- ====================================================== -->
+    <!-- DEVELOPERS -->
+    <!-- ====================================================== -->
 
     <developers>
         <developer>
-            <id>cykeromens</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
+            <id>zimesfield</id>
+            <name>Zimesfield Team</name>
+            <email>tech@zimesfield.com</email>
+            <organization>Zimesfield</organization>
+            <organizationUrl>
+                https://github.com/zimesfield
+            </organizationUrl>
         </developer>
     </developers>
 
+    <!-- ====================================================== -->
+    <!-- SCM -->
+    <!-- ====================================================== -->
+
     <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
+
+        <connection>
+            scm:git:https://github.com/zimesfield/zimesfield-platform.git
+        </connection>
+
+        <developerConnection>
+            scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git
+        </developerConnection>
+
+        <url>
+            https://github.com/zimesfield/zimesfield-platform
+        </url>
+
         <tag>HEAD</tag>
+
     </scm>
 
+    <!-- ====================================================== -->
+    <!-- PROPERTIES -->
+    <!-- ====================================================== -->
+
+    <properties>
+
+        <!-- Inherited from parent -->
+        <revision>1.0.0</revision>
+
+        <!-- Optional -->
+        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+
+    </properties>
+
+    <!-- ====================================================== -->
+    <!-- DEPENDENCIES -->
+    <!-- ====================================================== -->
+
     <dependencies>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>
 
+    <!-- ====================================================== -->
+    <!-- BUILD -->
+    <!-- ====================================================== -->
+
     <build>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-source-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.sonatype.central</groupId>-->
-<!--                <artifactId>central-publishing-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-gpg-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>com.diffplug.spotless</groupId>
-                    <artifactId>spotless-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+
+        <plugins>
+
+            <!-- ============================================== -->
+            <!-- COMPILER -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- TESTS -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- QUALITY -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- SOURCE -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- JAVADOC -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- FLATTEN -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- ============================================== -->
+            <!-- GPG -->
+            <!-- ============================================== -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
     </build>
+
+    <!-- ====================================================== -->
+    <!-- RELEASE PROFILE -->
+    <!-- ====================================================== -->
+
     <profiles>
+
         <profile>
+
             <id>release</id>
+
             <build>
+
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
+                    <!-- ====================================== -->
+                    <!-- MAVEN CENTRAL -->
+                    <!-- ====================================== -->
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Sonatype Central -->
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <artifactId>
+                            central-publishing-maven-plugin
+                        </artifactId>
                     </plugin>
 
                 </plugins>
-            </build>
-        </profile>
-    </profiles>
 
+            </build>
+
+        </profile>
+
+    </profiles>
 
 </project>

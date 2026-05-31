@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- ====================================================== -->
+    <!-- PARENT -->
+    <!-- ====================================================== -->
+
     <parent>
         <groupId>com.zimesfield</groupId>
         <artifactId>platform-parent</artifactId>
@@ -9,27 +18,53 @@
         <relativePath>../../platform-parent/pom.xml</relativePath>
     </parent>
 
+    <!-- ====================================================== -->
+    <!-- PROJECT -->
+    <!-- ====================================================== -->
+
     <artifactId>openapi-starter</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>OpenAPI Starter</name>
-    <description>Shared platform dependencies and parent POMs</description>
+
+    <description>
+        Reusable OpenAPI + WebFlux starter with problem handling
+        for Zimesfield platform services.
+    </description>
+
     <url>https://github.com/zimesfield/zimesfield-platform</url>
+
+    <!-- ====================================================== -->
+    <!-- LICENSE -->
+    <!-- ====================================================== -->
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
+    <!-- ====================================================== -->
+    <!-- DEVELOPERS -->
+    <!-- ====================================================== -->
+
     <developers>
         <developer>
-            <id>cykeromens</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
+            <id>zimesfield</id>
+            <name>Zimesfield Team</name>
+            <email>tech@zimesfield.com</email>
+            <organization>Zimesfield</organization>
+            <organizationUrl>
+                https://github.com/zimesfield
+            </organizationUrl>
         </developer>
     </developers>
+
+    <!-- ====================================================== -->
+    <!-- SCM -->
+    <!-- ====================================================== -->
 
     <scm>
         <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
@@ -38,145 +73,215 @@
         <tag>HEAD</tag>
     </scm>
 
+    <!-- ====================================================== -->
+    <!-- PROPERTIES -->
+    <!-- ====================================================== -->
+
     <properties>
-        <!-- Child project properties -->
+
+        <!-- build metadata -->
         <start-class/>
         <application-name/>
+
+        <!-- OpenAPI -->
         <api-input-spec/>
         <api-package/>
         <api-model-package/>
+
+        <!-- infra placeholders (kept for downstream override only) -->
         <db-url/>
         <db-url-dev/>
         <db-username/>
         <db-password/>
-        <liquibase.masterlog>src/main/resources/config/liquibase/master.yaml</liquibase.masterlog>
 
-        <!-- Profile properties -->
+        <!-- Liquibase -->
+        <liquibase.masterlog>
+            src/main/resources/config/liquibase/master.yaml
+        </liquibase.masterlog>
+
+        <!-- Profiles -->
         <profile.api-docs/>
         <profile.e2e/>
         <profile.no-liquibase/>
         <profile.test/>
         <profile.tls/>
 
-        <openapi-generator-maven-plugin.version>7.22.0</openapi-generator-maven-plugin.version>
+        <!-- versions -->
+        <openapi-generator.version>7.22.0</openapi-generator.version>
+        <springdoc.version>2.7.0</springdoc.version>
+
     </properties>
 
+    <!-- ====================================================== -->
+    <!-- DEPENDENCIES -->
+    <!-- ====================================================== -->
+
     <dependencies>
+
+        <!-- Core WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+
+        <!-- AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!-- Auto-config support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!-- OpenAPI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
         </dependency>
 
+        <!-- Problem Details -->
         <dependency>
             <groupId>org.zalando</groupId>
             <artifactId>problem-spring-webflux</artifactId>
         </dependency>
+
     </dependencies>
 
+    <!-- ====================================================== -->
+    <!-- BUILD -->
+    <!-- ====================================================== -->
+
     <build>
+
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
+
+        <!-- ================================================== -->
+        <!-- PLUGIN MANAGEMENT -->
+        <!-- ================================================== -->
+
         <pluginManagement>
+
             <plugins>
+
+                <!-- ========================================== -->
+                <!-- OPENAPI GENERATOR -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>org.openapitools</groupId>
                     <artifactId>openapi-generator-maven-plugin</artifactId>
-                    <version>${openapi-generator-maven-plugin.version}</version>
+                    <version>${openapi-generator.version}</version>
+
                     <executions>
+
                         <execution>
-                            <id>generate-api</id>
+                            <id>generate-openapi</id>
+                            <phase>generate-sources</phase>
+
                             <goals>
                                 <goal>generate</goal>
                             </goals>
+
                             <configuration>
+
                                 <inputSpec>${api-input-spec}</inputSpec>
+
                                 <generatorName>spring</generatorName>
+
+                                <output>
+                                    ${project.build.directory}/generated-sources/openapi
+                                </output>
+
                                 <apiPackage>${api-package}</apiPackage>
                                 <modelPackage>${api-package}.model</modelPackage>
                                 <invokerPackage>${api-package}.invoker</invokerPackage>
 
-                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                                <skipValidateSpec>false</skipValidateSpec>
                                 <addCompileSourceRoot>true</addCompileSourceRoot>
-                                <output>${project.build.directory}/generated-sources/openapi</output>
 
                                 <configOptions>
+
                                     <delegatePattern>true</delegatePattern>
-                                    <title>${application-name}</title>
+
                                     <useSpringBoot3>true</useSpringBoot3>
                                     <useJakartaEe>true</useJakartaEe>
+
                                     <library>spring-boot</library>
-                                    <useSpringController>true</useSpringController>
-                                    <requestMappingMode>controller</requestMappingMode>
-                                    <useTags>true</useTags>
+
                                     <useWebFlux>true</useWebFlux>
                                     <reactive>true</reactive>
+
+                                    <useTags>true</useTags>
+
                                 </configOptions>
 
                                 <typeMappings>
-                                    <typeMapping>instant=Instant</typeMapping>
-                                    <typeMapping>Double=BigDecimal</typeMapping>
-                                    <typeMapping>Pageable=Pageable</typeMapping>
-                                    <typeMapping>PageRequest=PageRequest</typeMapping>
-                                    <typeMapping>PageResponse=Pageable</typeMapping>
-                                    <typeMapping>Page=Page</typeMapping>
-                                    <typeMapping>Problem=Problem</typeMapping>
-                                    <importMapping>Controller=RestController</importMapping>
+                                    Instant=Instant
+                                    Double=BigDecimal
+                                    Pageable=Pageable
+                                    Page=Page
+                                    Problem=Problem
                                 </typeMappings>
+
                                 <importMappings>
-                                    <importMapping>Instant=java.time.Instant</importMapping>
-                                    <importMapping>BigDecimal=java.math.BigDecimal</importMapping>
-                                    <importMapping>Problem=org.zalando.problem.Problem</importMapping>
-                                    <importMapping>
-                                        RestController=org.springframework.web.bind.annotation.RestController
-                                    </importMapping>
-                                    <importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
-                                    <importMapping>PageRequest=org.springframework.data.domain.PageRequest
-                                    </importMapping>
+                                    Instant=java.time.Instant
+                                    BigDecimal=java.math.BigDecimal
+                                    Problem=org.zalando.problem.Problem
+                                    Pageable=org.springframework.data.domain.Pageable
                                 </importMappings>
+
                             </configuration>
+
                         </execution>
+
                     </executions>
+
                 </plugin>
 
             </plugins>
+
         </pluginManagement>
+
     </build>
 
+    <!-- ====================================================== -->
+    <!-- RELEASE PROFILE (MAVEN CENTRAL SAFE) -->
+    <!-- ====================================================== -->
+
     <profiles>
+
         <profile>
+
             <id>release</id>
+
             <build>
+
                 <plugins>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -192,16 +297,17 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
 
-                    <!-- Sonatype Central -->
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
                     </plugin>
 
                 </plugins>
-            </build>
-        </profile>
-    </profiles>
 
+            </build>
+
+        </profile>
+
+    </profiles>
 
 </project>

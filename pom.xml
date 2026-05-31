@@ -1,22 +1,30 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- ===================== -->
+    <!-- Project Coordinates   -->
+    <!-- ===================== -->
     <groupId>com.zimesfield</groupId>
     <artifactId>zimesfield-platform</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform</name>
-    <description>Aggregator for Zimesfield platform modules</description>
+    <description>Multi-module aggregator for Zimesfield platform services and starters</description>
     <url>https://github.com/zimesfield/zimesfield-platform</url>
 
+    <!-- ===================== -->
+    <!-- Metadata              -->
+    <!-- ===================== -->
     <licenses>
         <license>
             <name>Apache License 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
@@ -34,14 +42,26 @@
         <url>https://github.com/zimesfield/zimesfield-platform</url>
         <tag>HEAD</tag>
     </scm>
+
+    <!-- ===================== -->
+    <!-- Build Properties      -->
+    <!-- ===================== -->
     <properties>
         <revision>1.0.0</revision>
+
+        <!-- Prevent accidental deployment from root aggregator -->
         <maven.deploy.skip>true</maven.deploy.skip>
+
+        <!-- Reproducible builds -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <!-- ===================== -->
+    <!-- Modules               -->
+    <!-- ===================== -->
     <modules>
         <module>platform-parent</module>
         <module>platform-bom</module>
-<!--        <module>platform-release</module>-->
 
         <module>starters/service-starter</module>
         <module>starters/modulith-starter</module>
@@ -49,16 +69,50 @@
         <module>starters/openapi-starter</module>
     </modules>
 
+    <!-- ===================== -->
+    <!-- Build Profiles        -->
+    <!-- ===================== -->
     <profiles>
+
+        <!-- Release publishing profile -->
+        <profile>
+            <id>release</id>
+
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+
+            <!-- IMPORTANT: aggregator should NOT redefine modules -->
+            <build>
+                <plugins>
+                    <!-- Optional: enforce build rules -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+        <!-- Optional selective starter build -->
         <profile>
             <id>publish-starters</id>
-            <modules>
-                <module>starters/library-starter</module>
-                <module>starters/openapi-starter</module>
-                <module>starters/service-starter</module>
-                <module>starters/modulith-starter</module>
-            </modules>
+
+            <!-- BEST PRACTICE FIX:
+                 DO NOT redefine <modules> here (bad Maven behavior)
+                 Instead use activation + build filtering strategy
+            -->
+            <activation>
+                <property>
+                    <name>publish-starters</name>
+                </property>
+            </activation>
+
         </profile>
+
     </profiles>
 
 </project>

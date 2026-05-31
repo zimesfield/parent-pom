@@ -1,6 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- ====================================================== -->
+    <!-- PROJECT -->
+    <!-- ====================================================== -->
 
     <groupId>com.zimesfield</groupId>
     <artifactId>platform-bom</artifactId>
@@ -8,43 +17,85 @@
     <packaging>pom</packaging>
 
     <name>Zimesfield Platform BOM</name>
-    <description>Dependency management BOM for Zimesfield platform</description>
+    <description>
+        Dependency management BOM for Zimesfield platform
+    </description>
 
     <url>https://github.com/zimesfield/zimesfield-platform</url>
+
+    <!-- ====================================================== -->
+    <!-- METADATA -->
+    <!-- ====================================================== -->
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>
+                https://www.apache.org/licenses/LICENSE-2.0.txt
+            </url>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <id>cyprian</id>
-            <name>Cyprian Omenuko</name>
-            <email>cykeromens@gmail.com</email>
+            <id>zimesfield</id>
+            <name>Zimesfield Team</name>
+            <email>tech@zimesfield.com</email>
+            <organization>Zimesfield</organization>
+            <organizationUrl>
+                https://github.com/zimesfield
+            </organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/zimesfield/zimesfield-platform.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git</developerConnection>
-        <url>https://github.com/zimesfield/zimesfield-platform</url>
+        <connection>
+            scm:git:https://github.com/zimesfield/zimesfield-platform.git
+        </connection>
+
+        <developerConnection>
+            scm:git:ssh://git@github.com:zimesfield/zimesfield-platform.git
+        </developerConnection>
+
+        <url>
+            https://github.com/zimesfield/zimesfield-platform
+        </url>
+
+        <tag>HEAD</tag>
     </scm>
 
+    <!-- ====================================================== -->
+    <!-- PROPERTIES -->
+    <!-- ====================================================== -->
+
     <properties>
+
+        <!-- Release -->
         <revision>1.0.0</revision>
+
+        <!-- Java -->
+        <java.version>21</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- Reproducible Builds -->
+        <project.build.outputTimestamp>
+            2026-01-01T00:00:00Z
+        </project.build.outputTimestamp>
+
+        <!-- ================================================== -->
+        <!-- DEPENDENCY VERSIONS -->
+        <!-- ================================================== -->
+
         <!-- Spring -->
         <spring-boot.version>3.5.14</spring-boot.version>
-        <spring-cloud-dependencies.version>2025.1.1</spring-cloud-dependencies.version>
+        <spring-cloud.version>2025.1.1</spring-cloud.version>
         <springdoc.version>2.8.17</springdoc.version>
-<!--        <modulith.version>2.0.6</modulith.version>-->
-        <spring.modulith.version>1.4.11</spring.modulith.version>
+        <spring-modulith.version>1.4.11</spring-modulith.version>
+
         <!-- Reactive -->
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
@@ -52,12 +103,10 @@
         <mongock-bom.version>5.5.0</mongock-bom.version>
         <liquibase.version>4.33.0</liquibase.version>
 
-        <!-- Codegen -->
-        <mapstruct.version>1.6.3</mapstruct.version>
-
         <!-- Utilities -->
-        <zalando-problem.version>0.29.1</zalando-problem.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.46</lombok.version>
+        <zalando-problem.version>0.29.1</zalando-problem.version>
         <ulid-creator.version>5.2.3</ulid-creator.version>
 
         <!-- Observability -->
@@ -66,10 +115,31 @@
         <!-- OpenAPI -->
         <jackson-databind-nullable.version>0.2.10</jackson-databind-nullable.version>
 
+        <!-- ================================================== -->
+        <!-- BUILD TOOLING -->
+        <!-- ================================================== -->
+
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.5</maven-failsafe-plugin.version>
+
+        <maven-source-plugin.version>3.4.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+
+        <spotless.version>2.46.1</spotless.version>
+        <jacoco.version>0.8.14</jacoco.version>
+
+        <flatten.version>1.6.0</flatten.version>
+        <gpg.version>3.2.8</gpg.version>
+        <central-publishing-plugin.version>0.10.0</central-publishing-plugin.version>
+
     </properties>
 
-    <dependencyManagement>
+    <!-- ====================================================== -->
+    <!-- DEPENDENCY MANAGEMENT -->
+    <!-- ====================================================== -->
 
+    <dependencyManagement>
         <dependencies>
 
             <!-- Spring Boot -->
@@ -85,7 +155,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -94,7 +164,7 @@
             <dependency>
                 <groupId>org.springframework.modulith</groupId>
                 <artifactId>spring-modulith-bom</artifactId>
-                <version>${spring.modulith.version}</version>
+                <version>${spring-modulith.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -117,7 +187,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--            &lt;!&ndash; Springdoc &ndash;&gt;-->
+            <!-- SpringDoc -->
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
@@ -174,113 +244,114 @@
             </dependency>
 
         </dependencies>
-
     </dependencyManagement>
 
+    <!-- ====================================================== -->
+    <!-- BUILD -->
+    <!-- ====================================================== -->
+
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+
         <pluginManagement>
             <plugins>
 
-                <!-- Compiler -->
+                <!-- ========================================== -->
+                <!-- COMPILER -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.15.0</version>
+                    <version>${maven-compiler-plugin.version}</version>
+
                     <configuration>
                         <release>${java.version}</release>
                         <parameters>true</parameters>
                     </configuration>
                 </plugin>
 
-                <!-- Tests -->
+                <!-- ========================================== -->
+                <!-- TESTS -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.5</version>
+                    <version>${maven-surefire-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>${maven-failsafe-plugin.version}</version>
                 </plugin>
 
-                <!-- Code quality -->
+                <!-- ========================================== -->
+                <!-- QUALITY -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>com.diffplug.spotless</groupId>
                     <artifactId>spotless-maven-plugin</artifactId>
-                    <version>2.46.1</version>
+                    <version>${spotless.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.14</version>
+                    <version>${jacoco.version}</version>
                 </plugin>
 
-                <!-- Source / Javadoc -->
+                <!-- ========================================== -->
+                <!-- SOURCES -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>${maven-source-plugin.version}</version>
+
                     <executions>
                         <execution>
                             <id>attach-sources</id>
-                            <goals><goal>jar-no-fork</goal></goals>
+                            <phase>verify</phase>
+
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
 
+                <!-- ========================================== -->
+                <!-- JAVADOC -->
+                <!-- ========================================== -->
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.12.0</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <goals><goal>jar</goal></goals>
-                        </execution>
-                    </executions>
-                </plugin>
+                    <version>${maven-javadoc-plugin.version}</version>
 
-                <!-- GPG (ONLY configured, not executed here) -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.2.8</version>
                     <executions>
                         <execution>
-                            <id>sign</id>
-                            <phase>package</phase>
+                            <id>attach-javadocs</id>
+                            <phase>verify</phase>
+
                             <goals>
-                                <goal>sign</goal>
+                                <goal>jar</goal>
                             </goals>
                         </execution>
                     </executions>
-
-                    <configuration>
-                        <gpgArguments>
-                            <arg>--batch</arg>
-                            <arg>--yes</arg>
-                        </gpgArguments>
-                    </configuration>
                 </plugin>
+
+                <!-- ========================================== -->
+                <!-- FLATTEN -->
+                <!-- ========================================== -->
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
-                    <version>1.6.0</version>
+                    <version>${flatten.version}</version>
 
                     <configuration>
                         <updatePomFile>true</updatePomFile>
@@ -291,15 +362,17 @@
 
                         <execution>
                             <id>flatten</id>
-                            <phase>process-resources</phase>
+                            <phase>generate-resources</phase>
+
                             <goals>
                                 <goal>flatten</goal>
                             </goals>
                         </execution>
 
                         <execution>
-                            <id>flatten.clean</id>
+                            <id>flatten-clean</id>
                             <phase>clean</phase>
+
                             <goals>
                                 <goal>clean</goal>
                             </goals>
@@ -308,11 +381,44 @@
                     </executions>
                 </plugin>
 
+                <!-- ========================================== -->
+                <!-- GPG -->
+                <!-- ========================================== -->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${gpg.version}</version>
+
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                    <configuration>
+                        <useAgent>true</useAgent>
+
+                        <gpgArguments>
+                            <arg>--batch</arg>
+                            <arg>--yes</arg>
+                        </gpgArguments>
+                    </configuration>
+                </plugin>
+
+                <!-- ========================================== -->
+                <!-- MAVEN CENTRAL -->
+                <!-- ========================================== -->
+
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.10.0</version>
-                    <extensions>true</extensions>
+                    <version>${central-publishing-plugin.version}</version>
 
                     <configuration>
                         <publishingServerId>central</publishingServerId>
@@ -320,15 +426,25 @@
                         <waitUntil>published</waitUntil>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
+
     </build>
 
+    <!-- ====================================================== -->
+    <!-- RELEASE PROFILE -->
+    <!-- ====================================================== -->
+
     <profiles>
+
         <profile>
+
             <id>release</id>
+
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -344,14 +460,16 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
 
-                    <!-- Sonatype Central -->
                     <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
                     </plugin>
 
                 </plugins>
             </build>
+
         </profile>
+
     </profiles>
+
 </project>
