@@ -28,7 +28,7 @@
         This is a reusable dependency starter,
         not an aggregator module.
     -->
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Service Starter</name>
 

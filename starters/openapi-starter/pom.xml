@@ -23,7 +23,7 @@
     <!-- ====================================================== -->
 
     <artifactId>openapi-starter</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>OpenAPI Starter</name>
 

@@ -29,7 +29,7 @@
         This should be a JAR starter module,
         NOT a POM packaging module.
     -->
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Library Starter</name>
 
