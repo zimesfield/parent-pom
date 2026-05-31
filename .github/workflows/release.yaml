@@ -83,4 +83,4 @@ jobs:
           starters/modulith-starter,\
           starters/library-starter,\
           starters/openapi-starter \
-            -Drevision=0.7.4
+            -Drevision=${VERSION}
