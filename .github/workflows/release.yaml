@@ -75,9 +75,10 @@ jobs:
       - name: Publish to Maven Central
         run: |
           ./mvnw org.sonatype.central:central-publishing-maven-plugin:0.10.0:publish \
-            -pl platform-bom,platform-parent,\
+            -pl platform-bom,platform-parent \
+            -Drevision=${VERSION}
 #          starters/service-starter,\
 #          starters/modulith-starter,\
 #          starters/library-starter,\
 #          starters/openapi-starter \
-            -Drevision=${VERSION}
+#            -Drevision=${VERSION}
