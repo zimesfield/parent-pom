@@ -145,7 +145,7 @@
         <!-- DEPENDENCY VERSIONS -->
         <!-- ============================================== -->
 
-        <springdoc.version>2.7.0</springdoc.version>
+        <springdoc.version>3.0.3</springdoc.version>
 
         <!-- ============================================== -->
         <!-- SPRING -->
