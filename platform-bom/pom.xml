@@ -107,7 +107,7 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.46</lombok.version>
         <zalando-problem.version>0.29.1</zalando-problem.version>
-        <ulid-creator.version>5.2.3</ulid-creator.version>
+        <ulid-creator.version>5.2.4</ulid-creator.version>
 
         <!-- Observability -->
         <micrometer-context-propagation.version>1.2.1</micrometer-context-propagation.version>
