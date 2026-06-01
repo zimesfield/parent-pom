@@ -236,28 +236,28 @@
                 <artifactId>spotless-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.jacoco</groupId>-->
+<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--            </plugin>-->
 
-            <!-- ========================================== -->
-            <!-- SOURCE -->
-            <!-- ========================================== -->
+<!--            &lt;!&ndash; ========================================== &ndash;&gt;-->
+<!--            &lt;!&ndash; SOURCE &ndash;&gt;-->
+<!--            &lt;!&ndash; ========================================== &ndash;&gt;-->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-source-plugin</artifactId>-->
+<!--            </plugin>-->
 
             <!-- ========================================== -->
             <!-- JAVADOC -->
             <!-- ========================================== -->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--            </plugin>-->
 
             <!-- ========================================== -->
             <!-- FLATTEN -->
