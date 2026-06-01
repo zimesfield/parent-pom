@@ -100,7 +100,7 @@
         <feign-reactor-bom.version>4.2.1</feign-reactor-bom.version>
 
         <!-- Database -->
-        <mongock-bom.version>5.5.0</mongock-bom.version>
+        <mongock-bom.version>5.5.1</mongock-bom.version>
         <liquibase.version>4.33.0</liquibase.version>
 
         <!-- Utilities -->
