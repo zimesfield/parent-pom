@@ -279,44 +279,81 @@
                 <!-- FLATTEN -->
                 <!-- ========================================== -->
 
+<!--                <plugin>-->
+<!--                    <groupId>org.codehaus.mojo</groupId>-->
+<!--                    <artifactId>flatten-maven-plugin</artifactId>-->
+<!--                    <version>${flatten.version}</version>-->
+
+<!--                    <configuration>-->
+
+<!--                        <updatePomFile>true</updatePomFile>-->
+
+<!--                        <flattenMode>-->
+<!--                            resolveCiFriendliesOnly-->
+<!--                        </flattenMode>-->
+
+<!--                    </configuration>-->
+
+<!--                    <executions>-->
+
+<!--                        <execution>-->
+<!--                            <id>flatten</id>-->
+<!--                            <phase>generate-resources</phase>-->
+
+<!--                            <goals>-->
+<!--                                <goal>flatten</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+
+<!--                        <execution>-->
+<!--                            <id>flatten-clean</id>-->
+<!--                            <phase>clean</phase>-->
+
+<!--                            <goals>-->
+<!--                                <goal>clean</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+
+<!--                    </executions>-->
+
+<!--                </plugin>-->
+
+
+                <!-- Flatten CI-friendly versions -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
                     <version>${flatten.version}</version>
 
                     <configuration>
-
                         <updatePomFile>true</updatePomFile>
-
-                        <flattenMode>
-                            resolveCiFriendliesOnly
-                        </flattenMode>
-
+                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
                     </configuration>
 
                     <executions>
 
+                        <!-- Replace ${revision} during process-resources -->
                         <execution>
                             <id>flatten</id>
-                            <phase>generate-resources</phase>
-
+                            <phase>process-resources</phase>
                             <goals>
                                 <goal>flatten</goal>
                             </goals>
                         </execution>
 
+                        <!-- Restore original pom after build -->
                         <execution>
-                            <id>flatten-clean</id>
+                            <id>flatten.clean</id>
                             <phase>clean</phase>
-
                             <goals>
                                 <goal>clean</goal>
                             </goals>
                         </execution>
 
                     </executions>
-
                 </plugin>
+
+
 
                 <!-- ========================================== -->
                 <!-- GPG SIGNING -->
